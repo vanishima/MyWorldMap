@@ -1,12 +1,12 @@
 import { React } from "react";
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
-// import { Link } from "react-router-dom";
-import { Routes, Route, Link } from "react-router-dom";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import MyBlogs from "../pages/MyBlogs";
-import MyGallery from "../pages/MyGallery";
-import MyMap from "../pages/Map";
+import { Link } from "react-router-dom";
+// import { Routes, Route, Link } from "react-router-dom";
+// import Login from "../pages/Login";
+// import Register from "../pages/Register";
+// import MyBlogs from "../pages/MyBlogs";
+// import MyGallery from "../pages/MyGallery";
+// import MyMap from "../pages/Map";
 import myAuth from "../authStatus";
 
 const Header = () => {
@@ -42,7 +42,7 @@ const Header = () => {
             {user ? (
               <div>
                 <Navbar.Text className="me-2">
-                  Welcom, <a href="./user">{user.name}</a>
+                  Welcome, <a href="./user">{user.name}</a>
                 </Navbar.Text>
                 <Button
                   className="me-2"
@@ -65,14 +65,6 @@ const Header = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/myblogs" element={<MyBlogs />} />
-        <Route path="/myphotos" element={<MyGallery />} />
-        <Route path="/map" element={<MyMap />} />
-      </Routes>
     </header>
   );
 };

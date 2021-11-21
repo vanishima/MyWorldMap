@@ -14,68 +14,68 @@ app.use(express.json()); // parser
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "./my-world-map-front/build")));
-app.get("/map", function (req, res) {
-  res.sendFile(
-    path.join(__dirname, "./my-world-map-front/build/index.html"),
-    function (err) {
-      if (err) {
-        console.log("app.get Error", err);
-        res.status(500).send(err);
-      }
-    }
-  );
-});
-app.get("/login", function (req, res) {
-  res.sendFile(
-    path.join(__dirname, "./my-world-map-front/build/index.html"),
-    function (err) {
-      if (err) {
-        console.log("app.get Error", err);
-        res.status(500).send(err);
-      }
-    }
-  );
-});
-app.get("/register", function (req, res) {
-  res.sendFile(
-    path.join(__dirname, "./my-world-map-front/build/index.html"),
-    function (err) {
-      if (err) {
-        console.log("app.get Error", err);
-        res.status(500).send(err);
-      }
-    }
-  );
-});
-app.get("/myphotos", function (req, res) {
-  res.sendFile(
-    path.join(__dirname, "./my-world-map-front/build/index.html"),
-    function (err) {
-      if (err) {
-        console.log("app.get Error", err);
-        res.status(500).send(err);
-      }
-    }
-  );
-});
-app.get("/myblogs", function (req, res) {
-  res.sendFile(
-    path.join(__dirname, "./my-world-map-front/build/index.html"),
-    function (err) {
-      if (err) {
-        console.log("app.get Error", err);
-        res.status(500).send(err);
-      }
-    }
-  );
-});
+// app.get("/map", function (req, res) {
+//   res.sendFile(
+//     path.join(__dirname, "./my-world-map-front/build/index.html"),
+//     function (err) {
+//       if (err) {
+//         console.log("app.get Error", err);
+//         res.status(500).send(err);
+//       }
+//     }
+//   );
+// });
+// app.get("/login", function (req, res) {
+//   res.sendFile(
+//     path.join(__dirname, "./my-world-map-front/build/index.html"),
+//     function (err) {
+//       if (err) {
+//         console.log("app.get Error", err);
+//         res.status(500).send(err);
+//       }
+//     }
+//   );
+// });
+// app.get("/register", function (req, res) {
+//   res.sendFile(
+//     path.join(__dirname, "./my-world-map-front/build/index.html"),
+//     function (err) {
+//       if (err) {
+//         console.log("app.get Error", err);
+//         res.status(500).send(err);
+//       }
+//     }
+//   );
+// });
+// app.get("/myphotos", function (req, res) {
+//   res.sendFile(
+//     path.join(__dirname, "./my-world-map-front/build/index.html"),
+//     function (err) {
+//       if (err) {
+//         console.log("app.get Error", err);
+//         res.status(500).send(err);
+//       }
+//     }
+//   );
+// });
+// app.get("/myblogs", function (req, res) {
+//   res.sendFile(
+//     path.join(__dirname, "./my-world-map-front/build/index.html"),
+//     function (err) {
+//       if (err) {
+//         console.log("app.get Error", err);
+//         res.status(500).send(err);
+//       }
+//     }
+//   );
+// });
 
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
 app.use("/posts", postsRouter);
 
-app.listen(process.env.PORT || 3001, () => {
-  console.log("Server Started!");
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "./my-world-map-front/build", "index.html"));
 });
 
 module.exports = app;

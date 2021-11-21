@@ -43,7 +43,14 @@ const FormEditPost = ({ location, post, panTo }) => {
       : new Date().toISOString().slice(0, -3)
   );
   const [content, setContent] = useState(post ? post.content : "");
-  const isPrivateRef = useRef(null);
+  // const isPrivateRef = useRef(null);
+  const [isPrivate, setIsPrivate] = useState(
+    post && post.isPrivate ? true : false
+  );
+
+  const handleCheckBox = () => {
+    setIsPrivate(!isPrivate);
+  };
 
   const handleDelete = async (evt) => {
     evt.preventDefault();
@@ -68,7 +75,7 @@ const FormEditPost = ({ location, post, panTo }) => {
       content: content,
       authorId: post ? post.authorId : user._id,
       authorName: post ? post.authorName : user.name,
-      isPrivate: isPrivateRef.current.checked,
+      isPrivate: isPrivate,
       location: post ? post.location : location,
     };
     console.log("new post", newPost);
@@ -140,12 +147,10 @@ const FormEditPost = ({ location, post, panTo }) => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formPrivateCheckbox">
-        <Form.Check
-          type="checkbox"
-          label="Set as private"
-          checked={post ? post.isPrivate : false}
-          ref={isPrivateRef}
-        />
+        <Form.Label className="form-control">
+          <input type="checkbox" onClick={handleCheckBox} checked={isPrivate} />{" "}
+          Set as private
+        </Form.Label>
       </Form.Group>
       <Button className="me-2" variant="primary" type="submit">
         {post ? "Update" : "Create"}
@@ -158,6 +163,13 @@ const FormEditPost = ({ location, post, panTo }) => {
     </Form>
   );
 };
+
+// <Form.Check
+//   type="checkbox"
+//   label="Set as private"
+//   checked={post ? post.isPrivate : false}
+//   ref={isPrivateRef}
+// />
 
 FormEditPost.propTypes = {
   post: PropTypes.object,
