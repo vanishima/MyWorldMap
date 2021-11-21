@@ -69,20 +69,6 @@ app.get("/myblogs", function (req, res) {
     }
   );
 });
-const routes = ["/map", "login", "register"];
-routes.map((route) => {
-  app.get(route, function (req, res) {
-    res.sendFile(
-      path.join(__dirname, "./my-world-map-front/build/index.html"),
-      function (err) {
-        if (err) {
-          console.log("app.get Error", err);
-          res.status(500).send(err);
-        }
-      }
-    );
-  });
-});
 
 app.use("/", indexRouter);
 app.use("/auth", authRouter);

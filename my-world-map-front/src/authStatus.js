@@ -2,7 +2,7 @@ function myAuth() {
   const auth = {};
 
   auth.verifyAuth = async () => {
-    // if (localStorage.getItem("token") == null) return null;
+    if (localStorage.getItem("token") == null) return {};
     console.log("[authStatus] verifyAuth");
     const resRaw = await fetch("./auth/user", {
       method: "GET",
