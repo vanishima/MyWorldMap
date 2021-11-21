@@ -93,7 +93,7 @@ function PostDB() {
     }
   };
 
-  myDB.updatepostByID = async (post) => {
+  myDB.updatePostByID = async (post) => {
     const client = new MongoClient(uri, { useUnifiedTopology: true });
     console.log("Connecting to the db");
 
@@ -112,8 +112,7 @@ function PostDB() {
             date: post.date,
             content: post.content,
           },
-        },
-        { upsert: true }
+        }
       );
       console.log("Updated", res);
 

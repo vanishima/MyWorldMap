@@ -73,6 +73,7 @@ const FormEditPost = ({ location, post, panTo }) => {
     console.log("new post", newPost);
     let resRaw;
     if (post) {
+      newPost._id = post._id;
       resRaw = await updatePost(newPost);
     } else {
       resRaw = await createPost(newPost);
@@ -89,6 +90,7 @@ const FormEditPost = ({ location, post, panTo }) => {
       console.log("Failed to post", res.msg);
     }
   };
+
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formTitle">
@@ -137,7 +139,12 @@ const FormEditPost = ({ location, post, panTo }) => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formPrivateCheckbox">
-        <Form.Check type="checkbox" label="Set as private" ref={isPrivateRef} />
+        <Form.Check
+          type="checkbox"
+          label="Set as private"
+          checked={post ? post.isPrivate : false}
+          ref={isPrivateRef}
+        />
       </Form.Group>
       <Button className="me-2" variant="primary" type="submit">
         {post ? "Update" : "Create"}

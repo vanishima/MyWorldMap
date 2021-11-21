@@ -71,13 +71,13 @@ router.get("/:authorId", async (req, res) => {
 });
 
 /* POST UPDATE current post */
-router.post("/update", async (req, res) => {
+router.post("/update", auth, async (req, res) => {
   const post = req.body;
-
   console.log("enter /posts/update post", post);
 
   // update post
   try {
+    console.log("trying to update post");
     const dbRes = await Post.updatePostByID(post);
     console.log("dbRes: ", dbRes);
     res.status(200).json({ status: "OK" });
@@ -88,7 +88,7 @@ router.post("/update", async (req, res) => {
 });
 
 /* POST DELETE current post */
-router.post("/delete", async (req, res) => {
+router.post("/delete", auth, async (req, res) => {
   const post = req.body;
 
   console.log("enter /posts/delete", post);
