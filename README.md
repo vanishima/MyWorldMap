@@ -38,4 +38,4 @@ https://youtu.be/UHsmBG3kcuA
 
 ## Slides
 
-[MyWorldMap - Demo Slides](https://docs.google.com/presentation/d/1YWO2BhOK9eBZhFptax2Dc68FTBAMlQ1yOyuQYALaq44/edit?usp=sharing)
+[MyWorldMap - Demo Slides](https://docs.google.com/presentation/d/1-geLwJzYKJlspD50PFWPP8-ywgT82o4Yulhyj5pynX8/edit?usp=sharing)
