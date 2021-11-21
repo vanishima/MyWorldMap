@@ -25,7 +25,7 @@ router.get("/public", async (req, res) => {
     const posts = await Post.getPosts({
       $or: [{ isPublic: true }, { isPrivate: false }],
     });
-    res.send({ posts: posts });
+    res.status(200).json({ posts: posts });
   } catch (e) {
     res.status(400).json({ msg: e.message });
   }
