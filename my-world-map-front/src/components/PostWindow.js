@@ -4,6 +4,7 @@ import { Button, Offcanvas, Overlay, Tooltip } from "react-bootstrap";
 import { InfoWindow } from "@react-google-maps/api";
 import { formatRelative } from "date-fns";
 import FormEditPost from "./FormEditPost";
+import PropTypes from "prop-types";
 
 const PostWindow = ({ post, setPostSelected, panTo }) => {
   const [diaryShow, setDiaryShow] = useState(false);
@@ -68,6 +69,12 @@ const PostWindow = ({ post, setPostSelected, panTo }) => {
       </InfoWindow>
     </div>
   );
+};
+
+PostWindow.propTypes = {
+  post: PropTypes.object,
+  setPostSelected: PropTypes.func,
+  panTo: PropTypes.func,
 };
 
 export default PostWindow;

@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { Button, Form, FloatingLabel } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 async function createPost(post) {
   return fetch("./posts/create", {
@@ -156,6 +157,12 @@ const FormEditPost = ({ location, post, panTo }) => {
       )}
     </Form>
   );
+};
+
+FormEditPost.propTypes = {
+  post: PropTypes.object,
+  location: PropTypes.object,
+  panTo: PropTypes.func,
 };
 
 export default FormEditPost;

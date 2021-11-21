@@ -4,6 +4,7 @@ const config = require("config");
 function PostDB() {
   const myDB = {};
   const DB_NAME = "myworldmap";
+  // const uri = process.env.mongoURI;
   const uri = config.get("mongoURI");
   const COL_NAME_POST = "Posts";
 
