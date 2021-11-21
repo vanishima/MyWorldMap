@@ -4,11 +4,10 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const User = require("../db/userDB.js");
-const config = require("config");
 
 const auth = require("../middleware/auth");
 
-const JWT_SECRET = config.get("jwtSecret");
+const JWT_SECRET = process.env.JWT_SECRET;
 const { ObjectId } = require("mongodb");
 
 /* Register */

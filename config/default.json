@@ -1,4 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://projectUser:testtest@quoter.1muqt.mongodb.net/myworldmap?retryWrites=true&w=majority",
-  "jwtSecret": "sl_myJwtSecret"
-}

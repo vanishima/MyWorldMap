@@ -1,10 +1,10 @@
 const { MongoClient } = require("mongodb");
-const config = require("config");
+require("dotenv").config();
 
 function UserDB() {
   const myDB = {};
   const DB_NAME = "myworldmap";
-  const uri = config.get("mongoURI");
+  const uri = process.env.MONGO_URI;
 
   myDB.findOne = async (query = {}) => {
     const client = new MongoClient(uri, { useUnifiedTopology: true });

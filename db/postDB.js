@@ -1,11 +1,10 @@
 const { MongoClient, ObjectId } = require("mongodb");
-const config = require("config");
+require("dotenv").config();
 
 function PostDB() {
   const myDB = {};
   const DB_NAME = "myworldmap";
-  // const uri = process.env.mongoURI;
-  const uri = config.get("mongoURI");
+  const uri = process.env.MONGO_URI;
   const COL_NAME_POST = "Posts";
 
   myDB.findOne = async (query = {}) => {
