@@ -37,9 +37,7 @@ async function getPosts() {
   const user = JSON.parse(localStorage.getItem("user"));
   console.log("[Map.js] getPosts with user", user);
   if (user == null) {
-    return fetch("./posts/public", {
-      method: "GET",
-    });
+    return fetch("./posts/public");
   } else {
     const authorId = user.id;
     console.log("authorId before fetch", authorId);

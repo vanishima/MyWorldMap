@@ -7,6 +7,7 @@ const User = require("../db/userDB.js");
 
 const auth = require("../middleware/auth");
 
+require("dotenv").config();
 const JWT_SECRET = process.env.JWT_SECRET;
 const { ObjectId } = require("mongodb");
 

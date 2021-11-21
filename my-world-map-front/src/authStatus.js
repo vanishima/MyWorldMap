@@ -2,8 +2,8 @@ function myAuth() {
   const auth = {};
 
   auth.verifyAuth = async () => {
-    if (localStorage.getItem("token") == null) return {};
-    console.log("[authStatus] verifyAuth");
+    // if (localStorage.getItem("token") == null) return {};
+    console.log("[authStatus]auth.verifyAuth ready to fetch");
     const resRaw = await fetch("./auth/user", {
       method: "GET",
       headers: {
@@ -11,7 +11,7 @@ function myAuth() {
         "x-auth-token": localStorage.getItem("token"),
       },
     });
-    console.log("Got resRaw", resRaw);
+    console.log("[auth.verifyAuth] Got resRaw", resRaw);
     const res = await resRaw.json();
     if (resRaw.ok) {
       localStorage.setItem("user", JSON.stringify(res.user));
@@ -19,7 +19,7 @@ function myAuth() {
       localStorage.setItem("user", null);
       localStorage.setItem("token", "");
     }
-    console.log("Got res", res);
+    console.log("[auth.verifyAuth] Got res", res);
     return res;
   };
 
