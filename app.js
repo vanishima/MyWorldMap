@@ -74,4 +74,8 @@ app.use("/", indexRouter);
 app.use("/auth", authRouter);
 app.use("/posts", postsRouter);
 
+app.listen(process.env.PORT || 3001, () => {
+  console.log("Server Started!");
+});
+
 module.exports = app;
