@@ -12,11 +12,11 @@ Instructor: [John Alexis Guerra Gómez](https://johnguerra.co/)
 
 ## Screenshot
 
-![Quoter demo](https://github.com/vanishima/Quoter/blob/main/demo/screenshot_hompage.png?raw=true)
-![Quoter demo](https://github.com/vanishima/Quoter/blob/main/demo/screenshot_books.png?raw=true)
-![Quoter demo](https://github.com/vanishima/Quoter/blob/main/demo/screenshot_authors.png?raw=true)
-![Quoter demo](https://github.com/vanishima/Quoter/blob/main/demo/screenshot_authordetails.png?raw=true)
-![Quoter demo](https://github.com/vanishima/Quoter/blob/main/demo/screenshot_bookdetails.png?raw=true)
+![MyWorldMap demo](https://github.com/vanishima/MyWorldMap/blob/main/demo/map.png?raw=true)
+![MyWorldMap demo](https://github.com/vanishima/MyWorldMap/blob/main/demo/register.png?raw=true)
+![MyWorldMap demo](https://github.com/vanishima/MyWorldMap/blob/main/demo/login.png?raw=true)
+![MyWorldMap demo](https://github.com/vanishima/MyWorldMap/blob/main/demo/editPost.png?raw=true)
+![MyWorldMap demo](https://github.com/vanishima/MyWorldMap/blob/main/demo/createPost.png?raw=true)
 
 ## Tech requirements
 
