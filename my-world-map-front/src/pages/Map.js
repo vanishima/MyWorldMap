@@ -55,11 +55,11 @@ async function drawPosts(setPosts) {
   console.log("[Map.js] drawPosts: starting");
   const resRaw = await getPosts();
   console.log("[Map.js] drawPosts: resRaw", resRaw);
-  // console.log("[Map.js] drawPosts: resRaw.text", resRaw.text());
+  // console.log("[Map.js] drawPosts: resRaw.text", await resRaw.text());
   const res = await resRaw.json();
   // console.log("[Map.js] drawPosts: res", res);
-  console.log("[Map.js] drawPosts: res.posts", res.posts);
-  setPosts(res.posts);
+  console.log("[Map.js] drawPosts: res.posts", await res.posts);
+  await setPosts(res.posts);
 }
 
 export default function App() {
