@@ -13,11 +13,9 @@ Instructor: [John Alexis Guerra Gómez](https://johnguerra.co/)
 
 ## Screenshot
 
-![MyWorldMap demo](https://github.com/vanishima/MyWorldMap/blob/main/demo/map.png?raw=true)
+![MyWorldMap demo](https://github.com/vanishima/MyWorldMap/blob/main/demo/interactive-map.gif?raw=true)
 ![MyWorldMap demo](https://github.com/vanishima/MyWorldMap/blob/main/demo/register.png?raw=true)
 ![MyWorldMap demo](https://github.com/vanishima/MyWorldMap/blob/main/demo/login.png?raw=true)
-![MyWorldMap demo](https://github.com/vanishima/MyWorldMap/blob/main/demo/editPost.png?raw=true)
-![MyWorldMap demo](https://github.com/vanishima/MyWorldMap/blob/main/demo/createPost.png?raw=true)
 
 ## Tech requirements
 
@@ -34,7 +32,7 @@ Instructor: [John Alexis Guerra Gómez](https://johnguerra.co/)
 
 ## Video demo
 
-https://youtu.be/UHsmBG3kcuA
+https://youtu.be/IblCkvUTTZc
 
 ## Slides
 
