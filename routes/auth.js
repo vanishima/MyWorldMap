@@ -73,7 +73,7 @@ router.post("/login", async function (req, res) {
   const { email, password } = req.body;
 
   // Simple validation
-  if (!email || !password){
+  if (!email || !password) {
     throw Error("Please enter all fields");
     // return res
     //   .status(400)

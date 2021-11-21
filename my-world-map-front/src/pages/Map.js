@@ -35,13 +35,15 @@ const center = {
 
 async function getPosts() {
   const user = JSON.parse(localStorage.getItem("user"));
+  console.log("[Map.js] getPosts with user", user);
   if (user == null) {
     return fetch("./posts/public", {
       method: "GET",
     });
   } else {
-    const authorId = user._id;
-    console.log("authorid before fetch", authorId);
+    const authorId = user.id;
+    console.log("authorId before fetch", authorId);
+    console.log("token before fetch", localStorage.getItem("token"));
     return fetch("./posts", {
       method: "GET",
       headers: {
@@ -52,9 +54,13 @@ async function getPosts() {
 }
 
 async function drawPosts(setPosts) {
+  console.log("[Map.js] drawPosts: starting");
   const resRaw = await getPosts();
+  console.log("[Map.js] drawPosts: resRaw", resRaw);
+  // console.log("[Map.js] drawPosts: resRaw.text", resRaw.text());
   const res = await resRaw.json();
-  console.log("posts", res.posts);
+  // console.log("[Map.js] drawPosts: res", res);
+  console.log("[Map.js] drawPosts: res.posts", res.posts);
   setPosts(res.posts);
 }
 

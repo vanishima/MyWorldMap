@@ -1,12 +1,12 @@
 import { React } from "react";
-import { Navbar, Container, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-// import { Routes, Route, Link } from "react-router-dom";
-// import Login from "../pages/Login";
-// import Register from "../pages/Register";
-// import MyBlogs from "../pages/MyBlogs";
-// import MyGallery from "../pages/MyGallery";
-// import MyMap from "../pages/Map";
+import { Navbar, Container, Nav, Button } from "react-bootstrap";
+// import { Link } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
+import MyBlogs from "../pages/MyBlogs";
+import MyGallery from "../pages/MyGallery";
+import MyMap from "../pages/Map";
 import myAuth from "../authStatus";
 
 const Header = () => {
@@ -19,22 +19,6 @@ const Header = () => {
     document.location.href = "/";
   };
 
-  // <Navbar.Collapse id="basic-navbar-nav">
-  //   <Nav className="me-auto">
-  //     <Nav.Link href="/map">Map</Nav.Link>
-  //     {user && <Nav.Link href="/myblogs">Blogs</Nav.Link>}
-  //     {user && <Nav.Link href="/myphotos">Gallery</Nav.Link>}
-  //   </Nav>
-  // </Navbar.Collapse>
-
-  // <Routes>
-  //   <Route path="/login" element={<Login />} />
-  //   <Route path="/register" element={<Register />} />
-  //   <Route path="/myblogs" element={<MyBlogs />} />
-  //   <Route path="/myphotos" element={<MyGallery />} />
-  //   <Route path="/map" element={<MyMap />} />
-  // </Routes>
-
   return (
     <header className="header">
       <Navbar bg="light" expand="lg">
@@ -46,7 +30,13 @@ const Header = () => {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
-
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="/map">Map</Nav.Link>
+              {user && <Nav.Link href="/myblogs">Blogs</Nav.Link>}
+              {user && <Nav.Link href="/myphotos">Gallery</Nav.Link>}
+            </Nav>
+          </Navbar.Collapse>
 
           <Navbar.Collapse className="justify-content-end">
             {user ? (
@@ -75,6 +65,14 @@ const Header = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/myblogs" element={<MyBlogs />} />
+        <Route path="/myphotos" element={<MyGallery />} />
+        <Route path="/map" element={<MyMap />} />
+      </Routes>
     </header>
   );
 };

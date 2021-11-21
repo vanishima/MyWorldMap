@@ -10,7 +10,6 @@ router.post("/create", auth, async (req, res) => {
   console.log(">>>>> POST /posts/create");
   const newPost = req.body;
   newPost.authorId = ObjectId(newPost.authorId);
-  // newPost.isPublic = newPost.isPublic == "true" ? true : false;
   try {
     console.log("ready to create new post", newPost);
     const response = await Post.createOne(newPost);
@@ -36,11 +35,12 @@ router.get("/public", async (req, res) => {
 router.get("/", auth, async (req, res) => {
   console.log(">>>>> GET /posts");
   const authorId = req.user.id;
+  console.log("authorId:", authorId);
   try {
     const posts = await Post.getPosts({
       authorId: ObjectId(authorId),
     });
-    res.send({ posts: posts });
+    res.status(200).json({ posts: posts });
   } catch (e) {
     res.status(400).json({ msg: e.message });
   }
@@ -53,11 +53,22 @@ router.get("/", auth, async (req, res) => {
 //   console.log("authorId:", authorId);
 //   try {
 //     const posts = await Post.getPosts({ authorId: ObjectId(authorId) });
-//     res.status(200).send({ posts: posts });
+//     res.status(200).json({ posts: posts });
 //   } catch (e) {
 //     res.status(400).send({ msg: e.message });
 //   }
 // });
+router.get("/:authorId", async (req, res) => {
+  console.log(">>>>> GET /posts");
+  const authorId = req.user.id;
+  console.log("authorId:", authorId);
+  try {
+    const posts = await Post.getPosts({ authorId: ObjectId(authorId) });
+    res.status(200).json({ posts: posts });
+  } catch (e) {
+    res.status(400).json({ msg: e.message });
+  }
+});
 
 /* POST UPDATE current post */
 router.post("/update", async (req, res) => {
