@@ -37,9 +37,9 @@ const Login = () => {
         </p>
       );
     } else if (res) {
-      console.log("Got res", res);
-      console.log("Got user name:", res.user.name);
-      console.log("Got token:", res.token);
+      console.log("[Login] handleSubmit: Got res", res);
+      console.log("[Login] handleSubmit: Got user name:", res.user.name);
+      console.log("[Login] handleSubmit: Got token:", res.token);
       localStorage.setItem("token", res.token);
       localStorage.setItem("user", JSON.stringify(res.user));
       document.location.href = "/";

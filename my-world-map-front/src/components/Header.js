@@ -12,7 +12,7 @@ import myAuth from "../authStatus";
 const Header = () => {
   myAuth.verifyAuth();
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log("user", user);
+  console.log("[Header] after verifyAuth: user", user);
 
   const logoutClick = () => {
     myAuth.logout();

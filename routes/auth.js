@@ -109,9 +109,11 @@ router.post("/login", async function (req, res) {
 // @desc Get user date
 // @access Private
 router.get("/user", auth, async (req, res) => {
+  console.log("[auth.js] GET /user");
   try {
-    const user = await User.getUserById({ _id: ObjectId(req.user.id) });
+    console.log("[auth.js] GET /user req.user:", req.user);
     console.log("GET /auth/user", req.user.id);
+    const user = await User.getUserById({ _id: ObjectId(req.user.id) });
     if (!user) {
       throw Error("User does not exist");
       // res.status(400).json({ valid: false, msg: "User does not exist" });
