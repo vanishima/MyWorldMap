@@ -2,12 +2,6 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 
-router.get("/api", (req, res) => {
-  res.json({
-    message: "Welcome to the API",
-  });
-});
-
 router.post("/posts", verifyToken, (req, res) => {
   console.log("token:", req.token);
   jwt.verify(req.token, "secretkey", (err, authData) => {
