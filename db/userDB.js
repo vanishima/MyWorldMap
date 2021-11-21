@@ -1,13 +1,6 @@
 const { MongoClient } = require("mongodb");
 const config = require("config");
 
-async function listDatabases(client) {
-  const databasesList = await client.db().admin().listDatabases();
-  console.log("Databases: ");
-
-  databasesList.databases.forEach((db) => console.log(` - ${db.name}`));
-}
-
 function UserDB() {
   const myDB = {};
   const DB_NAME = "myworldmap";
@@ -20,8 +13,6 @@ function UserDB() {
     try {
       await client.connect();
       console.log("Connected");
-
-      // console.log(await listDatabases(client));
 
       const col = client.db(DB_NAME).collection("Users");
       console.log("Collection ready, querying:", query);
@@ -43,8 +34,6 @@ function UserDB() {
     try {
       await client.connect();
       console.log("Connected");
-
-      // console.log(await listDatabases(client));
 
       const col = client.db(DB_NAME).collection("Users");
       console.log("Collection ready, querying:", query);

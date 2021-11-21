@@ -23,7 +23,9 @@ router.post("/create", auth, async (req, res) => {
 /* GET public posts*/
 router.get("/public", async (req, res) => {
   try {
-    const posts = await Post.getPosts({ isPublic: true });
+    const posts = await Post.getPosts({
+      $or: [{ isPublic: true }, { isPrivate: false }],
+    });
     res.send({ posts: posts });
   } catch (e) {
     res.status(400).json({ msg: e.message });
@@ -74,7 +76,6 @@ router.post("/update", async (req, res) => {
     res.status(400).send({ msg: e });
   }
 });
-
 
 /* POST DELETE current post */
 router.post("/delete", async (req, res) => {

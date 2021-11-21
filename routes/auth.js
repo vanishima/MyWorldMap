@@ -12,7 +12,7 @@ const JWT_SECRET = config.get("jwtSecret");
 const { ObjectId } = require("mongodb");
 
 /* Register */
-router.post("/register", async (req, res, next) => {
+router.post("/register", async (req, res) => {
   console.log(">>>>> POST register", req.body);
   const { name, email, password } = req.body;
 
@@ -109,12 +109,14 @@ router.post("/login", async function (req, res) {
 router.get("/user", auth, async (req, res) => {
   try {
     const user = await User.getUserById({ _id: ObjectId(req.user.id) });
-    if (!user)
-      res.status(400).json({ valid: false, msg: "User does not exist" });
-    // throw Error("User does not exist");
-    delete user.password;
+    if (!user) {
+      return res.status(400).json({ valid: false, msg: "User does not exist" });
+    } else {
+      // throw Error("User does not exist");
+      delete user.password;
 
-    res.status(200).json({ valid: true, user: user });
+      return res.status(200).json({ valid: true, user: user });
+    }
   } catch (e) {
     res.status(400).json({ valid: false, msg: e.message });
   }
