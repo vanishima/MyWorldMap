@@ -35,11 +35,10 @@ router.get("/public", async (req, res) => {
 /* GET posts by one user*/
 router.get("/", auth, async (req, res) => {
   console.log(">>>>> GET /posts");
-  console.log("req.body", req.body);
-  console.log("req.params", req.params);
+  const authorId = req.user.id;
   try {
     const posts = await Post.getPosts({
-      authorId: ObjectId(req.body.authorId),
+      authorId: ObjectId(authorId),
     });
     res.send({ posts: posts });
   } catch (e) {
@@ -48,17 +47,17 @@ router.get("/", auth, async (req, res) => {
 });
 
 /* GET posts by one user*/
-router.get("/:authorId", auth, async (req, res) => {
-  console.log(">>>>> GET /posts");
-  const authorId = req.params.authorId.trim();
-  console.log("authorId:", authorId);
-  try {
-    const posts = await Post.getPosts({ authorId: ObjectId(authorId) });
-    res.status(200).json({ posts: posts });
-  } catch (e) {
-    res.status(400).json({ msg: e.message });
-  }
-});
+// router.get("/:authorId", auth, async (req, res) => {
+//   console.log(">>>>> GET /posts");
+//   const authorId = req.params.authorId.trim();
+//   console.log("authorId:", authorId);
+//   try {
+//     const posts = await Post.getPosts({ authorId: ObjectId(authorId) });
+//     res.status(200).send({ posts: posts });
+//   } catch (e) {
+//     res.status(400).send({ msg: e.message });
+//   }
+// });
 
 /* POST UPDATE current post */
 router.post("/update", async (req, res) => {

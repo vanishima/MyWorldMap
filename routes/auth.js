@@ -73,10 +73,12 @@ router.post("/login", async function (req, res) {
   const { email, password } = req.body;
 
   // Simple validation
-  if (!email || !password)
-    return res
-      .status(400)
-      .json({ valid: false, msg: "Please enter all fields" });
+  if (!email || !password){
+    throw Error("Please enter all fields");
+    // return res
+    //   .status(400)
+    //   .json({ valid: false, msg: "Please enter all fields" });
+  }
 
   try {
     // Check for existing user
@@ -109,16 +111,16 @@ router.post("/login", async function (req, res) {
 router.get("/user", auth, async (req, res) => {
   try {
     const user = await User.getUserById({ _id: ObjectId(req.user.id) });
+    console.log("GET /auth/user", req.user.id);
     if (!user) {
-      return res.status(400).json({ valid: false, msg: "User does not exist" });
+      throw Error("User does not exist");
+      // res.status(400).json({ valid: false, msg: "User does not exist" });
     } else {
-      // throw Error("User does not exist");
       delete user.password;
-
-      return res.status(200).json({ valid: true, user: user });
+      res.status(200).send({ valid: true, user: user });
     }
   } catch (e) {
-    res.status(400).json({ valid: false, msg: e.message });
+    res.status(400).send({ valid: false, msg: e.message });
   }
 });
 

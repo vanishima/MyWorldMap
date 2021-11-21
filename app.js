@@ -15,6 +15,15 @@ app.use(express.json()); // parser
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "./my-world-map-front/build")));
+app.get("/*", function (req, res) {
+  res.sendFile(
+    path.join(
+      __dirname,
+      "./my-world-map-front/build",
+      "index.html"
+    )
+  );
+});
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
