@@ -14,9 +14,10 @@ function myAuth() {
     console.log("[auth.verifyAuth] Got resRaw", resRaw);
     const res = await resRaw.json();
     if (resRaw.ok) {
-      console.log("authStatus]auth.verifyAuth: user exists");
+      console.log("[authStatus]auth.verifyAuth: user exists");
       // localStorage.setItem("user", JSON.stringify(res.user));
     } else {
+      console.log("[authStatus]auth.verifyAuth: token not valid");
       localStorage.removeItem("user");
       localStorage.removeItem("token");
     }

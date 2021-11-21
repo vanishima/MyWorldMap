@@ -18,7 +18,7 @@ function auth(req, res, next) {
     // Add user from payload
     req.user = decoded;
 
-    next(); // call next piece of middlewa
+    next(); // call next piece of middleware
   } catch (e) {
     res.status(400).json({ valid: false, msg: "Token is not valid" });
   }

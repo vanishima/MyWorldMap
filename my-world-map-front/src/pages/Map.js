@@ -55,7 +55,6 @@ async function drawPosts(setPosts) {
   console.log("[Map.js] drawPosts: starting");
   const resRaw = await getPosts();
   console.log("[Map.js] drawPosts: resRaw", resRaw);
-  // console.log("[Map.js] drawPosts: resRaw.text", await resRaw.text());
   const res = await resRaw.json();
   // console.log("[Map.js] drawPosts: res", res);
   console.log("[Map.js] drawPosts: res.posts", await res.posts);
@@ -138,7 +137,7 @@ export default function App() {
           />
         ))}
 
-        {posts.map((post, i) => (
+        {posts && posts.map((post, i) => (
           <Marker
             key={`${post.location.lat}-${post.location.lng}-${post.location.time}-${i}`}
             position={{ lat: post.location.lat, lng: post.location.lng }}

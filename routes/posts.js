@@ -20,7 +20,7 @@ router.post("/create", auth, async (req, res) => {
 });
 
 /* GET public posts*/
-router.get("/public", auth, async (req, res) => {
+router.get("/public", async (req, res) => {
   try {
     const posts = await Post.getPosts({
       $or: [{ isPublic: true }, { isPrivate: false }],
