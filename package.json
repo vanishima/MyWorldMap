@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node ./node_modules/nodemon/bin/nodemon.js ./bin/www",
-    "heroku-build": "cd my-world-map-front && yarn install && yarn run build"
+    "deploy-build": "cd my-world-map-front && yarn install && yarn run build"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
