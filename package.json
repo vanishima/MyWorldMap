@@ -2,8 +2,10 @@
   "name": "my-world-map",
   "version": "0.0.0",
   "private": true,
+  "license": "MIT",
   "scripts": {
-    "start": "node ./node_modules/nodemon/bin/nodemon.js ./bin/www"
+    "start": "node ./node_modules/nodemon/bin/nodemon.js ./bin/www",
+    "heroku-build": "cd my-world-map-front && yarn install && yarn run build"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
