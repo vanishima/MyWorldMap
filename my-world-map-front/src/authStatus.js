@@ -3,7 +3,10 @@ function myAuth() {
 
   auth.verifyAuth = async () => {
     // if (localStorage.getItem("token") == null) return {};
-    console.log("[authStatus]auth.verifyAuth ready to fetch:", localStorage.getItem("token"));
+    console.log(
+      "[authStatus]auth.verifyAuth ready to fetch:",
+      localStorage.getItem("token")
+    );
     const resRaw = await fetch("./auth/user", {
       method: "GET",
       headers: {

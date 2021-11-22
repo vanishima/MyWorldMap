@@ -137,22 +137,23 @@ export default function App() {
           />
         ))}
 
-        {posts && posts.map((post, i) => (
-          <Marker
-            key={`${post.location.lat}-${post.location.lng}-${post.location.time}-${i}`}
-            position={{ lat: post.location.lat, lng: post.location.lng }}
-            onClick={() => {
-              console.log("post clicked", post);
-              setPostSelected(post);
-            }}
-            icon={{
-              url: "/icons/dinosaur.png",
-              origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(15, 15),
-              scaledSize: new window.google.maps.Size(35, 35),
-            }}
-          />
-        ))}
+        {posts &&
+          posts.map((post, i) => (
+            <Marker
+              key={`${post.location.lat}-${post.location.lng}-${post.location.time}-${i}`}
+              position={{ lat: post.location.lat, lng: post.location.lng }}
+              onClick={() => {
+                console.log("post clicked", post);
+                setPostSelected(post);
+              }}
+              icon={{
+                url: "/icons/dinosaur.png",
+                origin: new window.google.maps.Point(0, 0),
+                anchor: new window.google.maps.Point(15, 15),
+                scaledSize: new window.google.maps.Size(35, 35),
+              }}
+            />
+          ))}
 
         {postSelected ? (
           <PostWindow
