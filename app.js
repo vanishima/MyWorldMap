@@ -2,6 +2,7 @@ let express = require("express");
 let path = require("path");
 let cookieParser = require("cookie-parser");
 let logger = require("morgan");
+let cors = require("cors");
 
 let indexRouter = require("./routes/index");
 let authRouter = require("./routes/auth");
@@ -18,6 +19,8 @@ app.use(express.static(path.join(__dirname, "./my-world-map-front/build")));
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
 app.use("/posts", postsRouter);
+
+app.use(cors());
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === "production") {
