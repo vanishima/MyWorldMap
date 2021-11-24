@@ -2,38 +2,8 @@ import { useState } from "react";
 import { Button, Form, FloatingLabel } from "react-bootstrap";
 import PropTypes from "prop-types";
 
-async function createPost(post) {
-  return fetch("./posts/create", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-auth-token": localStorage.getItem("token"),
-    },
-    body: JSON.stringify(post),
-  });
-}
-
-async function updatePost(post) {
-  return fetch("./posts/update", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-auth-token": localStorage.getItem("token"),
-    },
-    body: JSON.stringify(post),
-  });
-}
-
-async function deletePost(post) {
-  return fetch("./posts/delete", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-auth-token": localStorage.getItem("token"),
-    },
-    body: JSON.stringify(post),
-  });
-}
+// API
+import PostsAPI from "../api/PostsAPI";
 
 const FormEditPost = ({ location, post, panTo }) => {
   const [title, setTitle] = useState(post ? post.title : "");
@@ -56,7 +26,7 @@ const FormEditPost = ({ location, post, panTo }) => {
   const handleDelete = async (evt) => {
     evt.preventDefault();
     console.log("trying to delete", post);
-    const resRaw = await deletePost(post);
+    const resRaw = await PostsAPI.deletePost(post);
     const res = await resRaw.json();
 
     if (resRaw.ok) {
@@ -75,7 +45,10 @@ const FormEditPost = ({ location, post, panTo }) => {
       title: title,
       date: date,
       content: content,
-      author: user,
+      author: {
+        id: user._id,
+        name: user.name,
+      },
       isPrivate: isPrivate,
       location: post ? post.location : location,
     };
@@ -83,9 +56,9 @@ const FormEditPost = ({ location, post, panTo }) => {
     let resRaw;
     if (post) {
       newPost._id = post._id;
-      resRaw = await updatePost(newPost);
+      resRaw = await PostsAPI.updatePost(newPost);
     } else {
-      resRaw = await createPost(newPost);
+      resRaw = await PostsAPI.createPost(newPost);
     }
     console.log("resRaw", resRaw);
     const res = await resRaw.json();
@@ -168,7 +141,6 @@ const FormEditPost = ({ location, post, panTo }) => {
     </Form>
   );
 };
-
 
 
 // <Form.Label>Privacy Level</Form.Label>

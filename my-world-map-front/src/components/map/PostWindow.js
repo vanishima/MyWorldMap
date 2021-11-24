@@ -1,10 +1,11 @@
 import { useState, useRef } from "react";
-import myAuth from "../authStatus";
+import PropTypes from "prop-types";
 import { Button, Offcanvas, Overlay, Tooltip } from "react-bootstrap";
 import { InfoWindow } from "@react-google-maps/api";
 import { formatRelative } from "date-fns";
-import FormEditPost from "./FormEditPost";
-import PropTypes from "prop-types";
+
+import FormEditPost from "../FormEditPost";
+import myAuth from "../../authStatus";
 
 const PostWindow = ({ post, setPostSelected, panTo }) => {
   const [diaryShow, setDiaryShow] = useState(false);

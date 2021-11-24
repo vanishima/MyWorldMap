@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 import myAuth from "../authStatus";
 
 const Header = () => {
-  myAuth.verifyAuth();
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log("[Header] after verifyAuth: user", user);
+  console.log("[Header] user:", user);
 
   const logoutClick = () => {
     myAuth.logout();
@@ -27,7 +26,7 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/map">Map</Nav.Link>
-              {user && <Nav.Link href="/myblogs">Blogs</Nav.Link>}
+              {user && <Nav.Link href="/myposts">Posts</Nav.Link>}
               {user && <Nav.Link href="/myphotos">Gallery</Nav.Link>}
             </Nav>
           </Navbar.Collapse>

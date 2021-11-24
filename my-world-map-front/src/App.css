@@ -45,10 +45,19 @@
   right: 1rem;
   background: none;
   border: none;
-  z-index: 0;
+  z-index: 11;
 }
 
 .locate img {
   width: 30px;
   cursor: pointer;
 }
+
+.post-filter {
+  position: absolue;
+  width: 100px;
+  top: 4rem;
+  left: 2rem;
+  z-index: 13;
+}
+

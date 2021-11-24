@@ -1,9 +1,9 @@
 import { useState, useRef } from "react";
-import myAuth from "../authStatus";
+import myAuth from "../../authStatus";
 import { Button, Offcanvas, Overlay, Tooltip } from "react-bootstrap";
 import { InfoWindow } from "@react-google-maps/api";
 import { formatRelative } from "date-fns";
-import FormEditPost from "./FormEditPost";
+import FormEditPost from "../FormEditPost";
 import PropTypes from "prop-types";
 
 const SpotWindow = ({ selected, setSelected, panTo }) => {
