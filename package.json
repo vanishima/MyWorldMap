@@ -6,8 +6,6 @@
   "author": "Shushu Chen",
   "scripts": {
     "start": "node ./node_modules/nodemon/bin/nodemon.js ./bin/www",
-    "deploy-build": "cd my-world-map-front && yarn install && yarn run build",
-    "heroku-postbuild": "YARN_PRODUCTION=false yarn install --prefix my-world-map-front && yarn run build --prefix my-world-map-front"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

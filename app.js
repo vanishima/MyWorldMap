@@ -33,5 +33,5 @@ app.get("*", function (req, res) {
     path.join(__dirname, "./my-world-map-front/build", "index.html")
   );
 });
-
+// "heroku-postbuild": "YARN_PRODUCTION=false yarn install --prefix my-world-map-front && yarn run build --prefix my-world-map-front"
 module.exports = app;

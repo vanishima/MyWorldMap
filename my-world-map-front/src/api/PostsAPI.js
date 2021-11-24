@@ -1,7 +1,6 @@
 const FRONTEND =
   process.env.NODE_ENV === "production"
-    ? ""
-    : process.env.REACT_APP_FRONTEND_PREFIX;
+    ? process.env.REACT_APP_FRONTEND_PREFIX : "";
 
 function PostsAPI() {
   const Posts = {};
