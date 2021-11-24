@@ -49,6 +49,7 @@ const FormEditPost = ({ location, post, panTo }) => {
   );
 
   const handleCheckBox = () => {
+    console.log("isPrivate changed", isPrivate);
     setIsPrivate(!isPrivate);
   };
 
@@ -69,12 +70,12 @@ const FormEditPost = ({ location, post, panTo }) => {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     const user = JSON.parse(localStorage.getItem("user"));
+    console.log("user from localStorage", user);
     const newPost = {
       title: title,
       date: date,
       content: content,
-      authorId: post ? post.authorId : user._id,
-      authorName: post ? post.authorName : user.name,
+      author: user,
       isPrivate: isPrivate,
       location: post ? post.location : location,
     };
@@ -118,7 +119,7 @@ const FormEditPost = ({ location, post, panTo }) => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formDatetime">
-        <Form.Label>Date</Form.Label>
+        
         <Form.Control
           type="datetime-local"
           min="1990-01-01T00:00:00.000Z"
@@ -137,7 +138,7 @@ const FormEditPost = ({ location, post, panTo }) => {
           <Form.Control
             as="textarea"
             placeholder="Write your thoughts here"
-            style={{ height: "100px" }}
+            style={{ height: "200px" }}
             value={content}
             onChange={(e) => {
               setContent(e.target.value);
@@ -147,29 +148,35 @@ const FormEditPost = ({ location, post, panTo }) => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formPrivateCheckbox">
-        <Form.Label className="form-control">
-          <input type="checkbox" onClick={handleCheckBox} checked={isPrivate} />{" "}
-          Set as private
-        </Form.Label>
+        <Form.Check
+          type="checkbox"
+          label="Set as private"
+          value={isPrivate}
+          onClick={handleCheckBox}
+        />
       </Form.Group>
-      <Button className="me-2" variant="primary" type="submit">
-        {post ? "Update" : "Create"}
-      </Button>
-      {post && (
-        <Button variant="danger" type="button" onClick={handleDelete}>
-          Delete
+      
+      <Form.Group>
+        <Button className="me-2" variant="primary" type="submit">
+          {post ? "Update" : "Create"}
         </Button>
-      )}
+        {post && (
+          <Button variant="danger" type="button" onClick={handleDelete}>
+            Delete
+          </Button>)}
+      </Form.Group>
     </Form>
   );
 };
 
-// <Form.Check
-//   type="checkbox"
-//   label="Set as private"
-//   checked={post ? post.isPrivate : false}
-//   ref={isPrivateRef}
-// />
+
+
+// <Form.Label>Privacy Level</Form.Label>
+//         <Form.Select aria-label="Default select">
+//           <option>Privacy Level</option>
+//           <option value="0">Public</option>
+//           <option value="1">Private</option>
+//         </Form.Select>
 
 FormEditPost.propTypes = {
   post: PropTypes.object,

@@ -9,7 +9,7 @@ const Post = require("../db/postDB.js");
 router.post("/create", auth, async (req, res) => {
   console.log(">>>>> POST /posts/create");
   const newPost = req.body;
-  newPost.authorId = ObjectId(newPost.authorId);
+  newPost.author.id = ObjectId(newPost.author.id);
   try {
     console.log("ready to create new post", newPost);
     const response = await Post.createOne(newPost);
@@ -39,7 +39,10 @@ router.get("/", auth, async (req, res) => {
   console.log("authorId:", authorId);
   try {
     const posts = await Post.getPosts({
-      authorId: ObjectId(authorId),
+      $or: [
+        { authorId: ObjectId(authorId) },
+        { "author.id": ObjectId(authorId) },
+      ],
     });
     res.status(200).json({ posts: posts });
   } catch (e) {
@@ -64,7 +67,12 @@ router.get("/:authorId", async (req, res) => {
   const authorId = req.user.id;
   console.log("authorId:", authorId);
   try {
-    const posts = await Post.getPosts({ authorId: ObjectId(authorId) });
+    const posts = await Post.getPosts({
+      $or: [
+        { authorId: ObjectId(authorId) },
+        { "author.id": ObjectId(authorId) },
+      ],
+    });
     res.status(200).json({ posts: posts });
   } catch (e) {
     res.status(400).json({ msg: e.message });

@@ -1,12 +1,6 @@
 import { React } from "react";
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-// import { Routes, Route, Link } from "react-router-dom";
-// import Login from "../pages/Login";
-// import Register from "../pages/Register";
-// import MyBlogs from "../pages/MyBlogs";
-// import MyGallery from "../pages/MyGallery";
-// import MyMap from "../pages/Map";
 import myAuth from "../authStatus";
 
 const Header = () => {

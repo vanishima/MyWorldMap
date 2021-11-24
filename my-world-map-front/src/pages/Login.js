@@ -1,3 +1,4 @@
+import Layout from "../components/Layout";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import myAuth from "../authStatus";
@@ -47,57 +48,62 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-auto">
-          <button onClick={myAuth.verifyAuth}>check authentication</button>
+    <Layout>
+      <div className="container">
+        <div className="row">
+          <div className="col-auto">
+            <button onClick={myAuth.verifyAuth}>check authentication</button>
 
-          <h4>Test user</h4>
-          <p>
-            email: aaa@gmail.com <br />
-            password: 123
-          </p>
+            <h4>Test user</h4>
+            <p>
+              email: aaa@gmail.com <br />
+              password: 123
+            </p>
+          </div>
+          <form
+            className="registerLoginDiv center col-4"
+            onSubmit={handleSubmit}
+          >
+            <h2>Sign in</h2>
+            {message}
+            <div className="form-group form-control">
+              <label>
+                Email:
+                <input
+                  className="form-control"
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </label>
+            </div>
+
+            <div className="form-group form-control">
+              <label>
+                Password:
+                <input
+                  className="form-control"
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </label>
+            </div>
+
+            <div>
+              <button className="btn btn-primary">Login</button>
+              <Link to="/register" className="right">
+                Don't have an account? Create one
+              </Link>
+            </div>
+          </form>
         </div>
-        <form className="registerLoginDiv center col-4" onSubmit={handleSubmit}>
-          <h2>Sign in</h2>
-          {message}
-          <div className="form-group form-control">
-            <label>
-              Email:
-              <input
-                className="form-control"
-                type="email"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </label>
-          </div>
-
-          <div className="form-group form-control">
-            <label>
-              Password:
-              <input
-                className="form-control"
-                type="password"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </label>
-          </div>
-
-          <div>
-            <button className="btn btn-primary">Login</button>
-            <Link to="/register" className="right">
-              Don't have an account? Create one
-            </Link>
-          </div>
-        </form>
       </div>
-    </div>
+    </Layout>
   );
 };
 

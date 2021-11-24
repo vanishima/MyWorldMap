@@ -5,6 +5,7 @@ function UserDB() {
   const myDB = {};
   const DB_NAME = "myworldmap";
   const uri = process.env.MONGO_URI;
+  const COL_NAME_USER = "Users";
 
   myDB.findOne = async (query = {}) => {
     const client = new MongoClient(uri, { useUnifiedTopology: true });
@@ -14,8 +15,8 @@ function UserDB() {
       await client.connect();
       console.log("Connected");
 
-      const col = client.db(DB_NAME).collection("Users");
-      console.log("Collection ready, querying:", query);
+      const col = client.db(DB_NAME).collection(COL_NAME_USER);
+      console.log(COL_NAME_USER, "Collection ready, findOne:", query);
 
       const user = await col.findOne(query);
       console.log("Found", user);
@@ -35,8 +36,8 @@ function UserDB() {
       await client.connect();
       console.log("Connected");
 
-      const col = client.db(DB_NAME).collection("Users");
-      console.log("Collection ready, querying:", query);
+      const col = client.db(DB_NAME).collection(COL_NAME_USER);
+      console.log(COL_NAME_USER, "Collection ready, getUserById:", query);
 
       const user = await col.findOne(query, { _id: 1, name: 1, email: 1 });
       console.log("Found:", user);
@@ -56,8 +57,8 @@ function UserDB() {
       await client.connect();
       // console.log("Connected");
 
-      const col = client.db(DB_NAME).collection("Users");
-      // console.log("Collection ready, creating user:", user);
+      const col = client.db(DB_NAME).collection(COL_NAME_USER);
+      console.log(COL_NAME_USER, "Collection ready, createOne:", user);
 
       const res = await col.insertOne(user);
       // console.log("Inserted", res);

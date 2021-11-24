@@ -18,7 +18,7 @@ function PostDB() {
       // console.log(await listDatabases(client));
 
       const col = client.db(DB_NAME).collection("Users");
-      console.log("Collection ready, querying:", query);
+      console.log(COL_NAME_POST, "Collection ready, findOne:", query);
 
       const user = await col.findOne(query);
 
@@ -38,10 +38,10 @@ function PostDB() {
       // console.log("Connected");
 
       const col = client.db(DB_NAME).collection(COL_NAME_POST);
-      // console.log("Collection ready, creating user:", user);
+      console.log(COL_NAME_POST, "Collection ready, createOne:", post);
 
       const res = await col.insertOne(post);
-      // console.log("Inserted", res);
+      console.log("Inserted", res);
 
       return res;
     } finally {
@@ -59,7 +59,7 @@ function PostDB() {
       console.log("Connected!");
 
       const col = client.db(DB_NAME).collection(COL_NAME_POST);
-      console.log("Collection ready, querying with ", query);
+      console.log(COL_NAME_POST, "Collection ready, getPosts:", query);
 
       const posts = await col.find(query).toArray();
 
@@ -80,7 +80,7 @@ function PostDB() {
 
       const db = client.db(DB_NAME);
       const col = db.collection(COL_NAME_POST);
-      console.log("Collection ready, deleting ", postID);
+      console.log(COL_NAME_POST, "Collection ready, deleting:", postID);
 
       const post = await col.deleteOne({ _id: postID });
 
@@ -102,7 +102,7 @@ function PostDB() {
       console.log("Connected!");
 
       const postsCol = client.db(DB_NAME).collection(COL_NAME_POST);
-      console.log("Collection ready, update ", post);
+      console.log(COL_NAME_POST, "Collection ready, update:", post);
 
       const res = await postsCol.updateOne(
         { _id: ObjectId(post._id) },

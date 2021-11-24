@@ -1,4 +1,5 @@
 import React from "react";
+import Layout from "../components/Layout";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import usePlacesAutocomplete, {
   getGeocode,
@@ -108,7 +109,7 @@ export default function App() {
   //       </h4>
 
   return (
-    <div>
+    <Layout>
       <Locate panTo={panTo} />
       <Search panTo={panTo} />
 
@@ -171,7 +172,7 @@ export default function App() {
           />
         ) : null}
       </GoogleMap>
-    </div>
+    </Layout>
   );
 }
 
