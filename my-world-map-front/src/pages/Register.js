@@ -2,15 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../stylesheets/registerLogin.css";
 
-async function registerUser(user) {
-  return fetch("./auth/register", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(user),
-  });
-}
+// API
+import UserAPI from "../api/UserAPI";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -27,7 +20,7 @@ const Register = () => {
       password: password,
     };
     console.log("Attemp to register", user);
-    const resRaw = await registerUser(user);
+    const resRaw = await UserAPI.register(user);
     const res = await resRaw.json();
 
     if (!resRaw.ok) {

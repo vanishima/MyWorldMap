@@ -1,6 +1,7 @@
 const FRONTEND =
   process.env.NODE_ENV === "production"
-    ? process.env.REACT_APP_FRONTEND_PREFIX : "";
+    ? process.env.REACT_APP_FRONTEND_PREFIX
+    : "";
 
 function PostsAPI() {
   const Posts = {};
@@ -19,40 +20,43 @@ function PostsAPI() {
         headers: {
           "x-auth-token": localStorage.getItem("token"),
         },
-        mode: "cors"
+        mode: "cors",
       });
     }
   };
 
   Posts.createPost = async (post) => {
-    return fetch("./posts/create", {
+    return fetch(FRONTEND + "/posts/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem("token"),
       },
+      mode: "cors",
       body: JSON.stringify(post),
     });
   };
 
   Posts.updatePost = async (post) => {
-    return fetch("./posts/update", {
+    return fetch(FRONTEND + "/posts/update", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem("token"),
       },
+      mode: "cors",
       body: JSON.stringify(post),
     });
   };
 
   Posts.deletePost = async (post) => {
-    return fetch("./posts/delete", {
+    return fetch(FRONTEND + "/posts/delete", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem("token"),
       },
+      mode: "cors",
       body: JSON.stringify(post),
     });
   };

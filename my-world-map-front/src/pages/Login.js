@@ -3,15 +3,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import myAuth from "../authStatus";
 
-async function loginUser(credentials) {
-  return fetch("./auth/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(credentials),
-  });
-}
+// API
+import UserAPI from "../api/UserAPI";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -27,7 +20,7 @@ const Login = () => {
     };
     console.log("Attemp to login", user);
     // Attemp to login
-    const resRaw = await loginUser(user);
+    const resRaw = await UserAPI.login(user);
     console.log("Got resRaw", resRaw);
     const res = await resRaw.json();
 
