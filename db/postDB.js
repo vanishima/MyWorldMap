@@ -60,7 +60,6 @@ function PostDB() {
 
       const col = client.db(DB_NAME).collection(COL_NAME_POST);
       console.log(COL_NAME_POST, "Collection ready, getPosts:", query);
-
       const posts = await col.find(query).toArray();
 
       return posts;
@@ -111,6 +110,7 @@ function PostDB() {
             title: post.title,
             date: post.date,
             content: post.content,
+            label: post.label,
           },
         }
       );

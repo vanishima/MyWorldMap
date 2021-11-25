@@ -6,16 +6,16 @@ const FRONTEND =
 function PostsAPI() {
   const Posts = {};
 
-  Posts.getPosts = async () => {
+  Posts.getPosts = async (label = null) => {
     const user = JSON.parse(localStorage.getItem("user"));
-    console.log("[Map.js] getPosts with user", user);
+    // console.log("[Map.js] getPosts with user", user);
+    const suffix = label ? "/label/" + label : "";
     if (user == null) {
-      return fetch(FRONTEND + "/posts/public");
+      return fetch(FRONTEND + "/posts/public" + suffix);
     } else {
-      const authorId = user.id;
-      console.log("authorId before fetch", authorId);
-      console.log("token before fetch", localStorage.getItem("token"));
-      return fetch("./posts", {
+      // console.log("user_id before fetch", user._id);
+      // console.log("token before fetch", localStorage.getItem("token"));
+      return fetch(FRONTEND + "/posts" + suffix, {
         method: "GET",
         headers: {
           "x-auth-token": localStorage.getItem("token"),
@@ -23,6 +23,16 @@ function PostsAPI() {
         mode: "cors",
       });
     }
+  };
+
+  Posts.getPostByID = async (postID) => {
+    return fetch(FRONTEND + "/posts/" + postID, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      mode: "cors"
+    });
   };
 
   Posts.createPost = async (post) => {

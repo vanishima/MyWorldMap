@@ -5,11 +5,15 @@ import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import Layout from "../components/Layout";
 import Search from "../components/map/Search";
 import Locate from "../components/map/Locate";
+import PostFilterBox from "../components/map/PostFilterBox";
 import SpotWindow from "../components/map/SpotWindow";
 import PostWindow from "../components/map/PostWindow";
 
 // API
-import PostsAPI from "../api/PostsAPI";
+// import PostsAPI from "../api/PostsAPI";
+// import UserAPI from "../api/UserAPI";
+import drawPosts from "../components/utils/drawPosts";
+import drawLabels from "../components/utils/drawLabels";
 
 // Styles
 import "@reach/combobox/styles.css";
@@ -32,21 +36,13 @@ const center = {
   lng: -121.88633,
 };
 
-async function drawPosts(setPosts) {
-  console.log("[Map.js] drawPosts: starting");
-  const resRaw = await PostsAPI.getPosts();
-  console.log("[Map.js] drawPosts: resRaw", resRaw);
-  const res = await resRaw.json();
-  // console.log("[Map.js] drawPosts: res", res);
-  console.log("[Map.js] drawPosts: res.posts", await res.posts);
-  await setPosts(res.posts);
-}
-
 export default function Map() {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
+  const [labels, setLabels] = useState(["eat", "memo", "photo spot"]);
+  const [labelsSelected, setLabelsSelected] = useState(null);
   const [markers, setMarkers] = useState([]);
   const [posts, setPosts] = useState([]);
   const [selected, setSelected] = useState(null);
@@ -75,7 +71,8 @@ export default function Map() {
 
   useEffect(() => {
     console.log("### EFFECT ###");
-    drawPosts(setPosts);
+    drawPosts(setPosts, labelsSelected);
+    drawLabels(setLabels);
   }, []);
 
   if (loadError) return "Error";
@@ -90,6 +87,11 @@ export default function Map() {
   //
   return (
     <Layout>
+      <PostFilterBox
+        labels={labels}
+        setLabelsSelected={setLabelsSelected}
+        setPosts={setPosts}
+      />
       <Locate panTo={panTo} />
       <Search panTo={panTo} />
 
@@ -124,7 +126,7 @@ export default function Map() {
               key={`${post.location.lat}-${post.location.lng}-${post.location.time}-${i}`}
               position={{ lat: post.location.lat, lng: post.location.lng }}
               onClick={() => {
-                console.log("post clicked", post);
+                // console.log("post clicked", post);
                 setPostSelected(post);
               }}
               icon={{
@@ -141,6 +143,7 @@ export default function Map() {
             post={postSelected}
             setPostSelected={setPostSelected}
             panTo={panTo}
+            labels={labels}
           />
         ) : null}
 
@@ -149,6 +152,7 @@ export default function Map() {
             selected={selected}
             setSelected={setSelected}
             panTo={panTo}
+            labels={labels}
           />
         ) : null}
       </GoogleMap>

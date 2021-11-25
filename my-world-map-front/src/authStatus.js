@@ -1,13 +1,13 @@
+const FRONTEND =
+  process.env.NODE_ENV === "production"
+    ? process.env.REACT_APP_FRONTEND_PREFIX
+    : "";
+
 function myAuth() {
   const auth = {};
 
   auth.verifyAuth = async () => {
-    // if (localStorage.getItem("token") == null) return {};
-    // console.log(
-    //   "[authStatus]auth.verifyAuth ready to fetch:",
-    //   localStorage.getItem("token")
-    // );
-    const resRaw = await fetch("./auth/user", {
+    const resRaw = await fetch(FRONTEND + "/auth/user", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -17,6 +17,7 @@ function myAuth() {
     });
     // console.log("[auth.verifyAuth] Got resRaw", resRaw);
     const res = await resRaw.json();
+    console.log(resRaw);
     if (resRaw.ok) {
       // console.log("[authStatus]auth.verifyAuth: user exists");
       localStorage.setItem("user", JSON.stringify(res.user));

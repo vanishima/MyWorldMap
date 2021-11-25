@@ -23,7 +23,7 @@ router.post("/create", auth, async (req, res) => {
 router.get("/public", async (req, res) => {
   try {
     const posts = await Post.getPosts({
-      $or: [{ isPublic: true }, { isPrivate: false }],
+      $and: [{ $or: [{ isPublic: true }, { isPrivate: false }] }, {}],
     });
     console.log("GET posts/public:", posts);
     res.status(200).json({ posts: posts });
@@ -50,6 +50,50 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+/* GET posts with label */
+router.get("/label/:label", auth, async (req, res) => {
+  const label = req.params.label;
+  const authorId = req.user.id;
+  console.log("GET /label", label);
+  console.log(label);
+  try {
+    const posts = await Post.getPosts({
+      $and: [
+        { label: label },
+        {
+          $or: [
+            { authorId: ObjectId(authorId) },
+            { "author.id": ObjectId(authorId) },
+          ],
+        },
+      ],
+    });
+    console.log("GET posts/label:", posts);
+    res.status(200).json({ posts: posts });
+  } catch (e) {
+    res.status(400).json({ msg: e.message });
+  }
+});
+
+/* GET public posts with label */
+router.get("/public/label/:label", async (req, res) => {
+  const label = req.params.label;
+  console.log("GET /public/label", label);
+  console.log(label);
+  try {
+    const posts = await Post.getPosts({
+      $and: [
+        { $or: [{ isPublic: true }, { isPrivate: false }] },
+        { label: label },
+      ],
+    });
+    console.log("GET posts/public:", posts);
+    res.status(200).json({ posts: posts });
+  } catch (e) {
+    res.status(400).json({ msg: e.message });
+  }
+});
+
 /* GET posts by one user*/
 // router.get("/:authorId", auth, async (req, res) => {
 //   console.log(">>>>> GET /posts");
@@ -62,17 +106,33 @@ router.get("/", auth, async (req, res) => {
 //     res.status(400).send({ msg: e.message });
 //   }
 // });
-router.get("/:authorId", async (req, res) => {
+// router.get("/:authorId", async (req, res) => {
+//   console.log(">>>>> GET /posts");
+//   const authorId = req.user.id;
+//   console.log("authorId:", authorId);
+//   try {
+//     const posts = await Post.getPosts({
+//       $or: [
+//         { authorId: ObjectId(authorId) },
+//         { "author.id": ObjectId(authorId) },
+//       ],
+//     });
+//     res.status(200).json({ posts: posts });
+//   } catch (e) {
+//     res.status(400).json({ msg: e.message });
+//   }
+// });
+
+/* GET post by ID */
+router.get("/:postID", async (req, res) => {
   console.log(">>>>> GET /posts");
-  const authorId = req.user.id;
-  console.log("authorId:", authorId);
+  const postID = req.params.postID;
+  console.log("postID:", postID);
   try {
     const posts = await Post.getPosts({
-      $or: [
-        { authorId: ObjectId(authorId) },
-        { "author.id": ObjectId(authorId) },
-      ],
+      _id: ObjectId(postID),
     });
+    console.log("GET /posts/postID", posts);
     res.status(200).json({ posts: posts });
   } catch (e) {
     res.status(400).json({ msg: e.message });

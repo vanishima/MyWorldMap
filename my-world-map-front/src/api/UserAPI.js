@@ -18,8 +18,8 @@ function UserAPI() {
   };
 
   User.register = (user) => {
-    return fetch("./auth/register", {
-      method: "POST",
+    return fetch(FRONTEND + "/auth/user", {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },

@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 // API
 import PostsAPI from "../api/PostsAPI";
 
-const FormEditPost = ({ location, post, panTo }) => {
+const FormEditPost = ({ location, post, panTo, labels }) => {
   const [title, setTitle] = useState(post ? post.title : "");
   const [date, setDate] = useState(
     post
@@ -17,6 +17,7 @@ const FormEditPost = ({ location, post, panTo }) => {
   const [isPrivate, setIsPrivate] = useState(
     post && post.isPrivate ? true : false
   );
+  const [label, setLabel] = useState(post && post.label ? post.label : "memo");
 
   const handleCheckBox = () => {
     console.log("isPrivate changed", isPrivate);
@@ -49,6 +50,7 @@ const FormEditPost = ({ location, post, panTo }) => {
         id: user._id,
         name: user.name,
       },
+      label: label,
       isPrivate: isPrivate,
       location: post ? post.location : location,
     };
@@ -92,7 +94,6 @@ const FormEditPost = ({ location, post, panTo }) => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formDatetime">
-        
         <Form.Control
           type="datetime-local"
           min="1990-01-01T00:00:00.000Z"
@@ -120,6 +121,22 @@ const FormEditPost = ({ location, post, panTo }) => {
         </FloatingLabel>
       </Form.Group>
 
+      <Form.Select aria-label="Default select example">
+        <option>{label ? label : "Set label"}</option>
+        {labels &&
+          labels.map((label, i) => (
+            <option
+              key={i}
+              value={label}
+              onChange={(e) => {
+                setLabel(e.target.value);
+              }}
+            >
+              {label}
+            </option>
+          ))}
+      </Form.Select>
+
       <Form.Group className="mb-3" controlId="formPrivateCheckbox">
         <Form.Check
           type="checkbox"
@@ -128,7 +145,7 @@ const FormEditPost = ({ location, post, panTo }) => {
           onClick={handleCheckBox}
         />
       </Form.Group>
-      
+
       <Form.Group>
         <Button className="me-2" variant="primary" type="submit">
           {post ? "Update" : "Create"}
@@ -136,12 +153,12 @@ const FormEditPost = ({ location, post, panTo }) => {
         {post && (
           <Button variant="danger" type="button" onClick={handleDelete}>
             Delete
-          </Button>)}
+          </Button>
+        )}
       </Form.Group>
     </Form>
   );
 };
-
 
 // <Form.Label>Privacy Level</Form.Label>
 //         <Form.Select aria-label="Default select">

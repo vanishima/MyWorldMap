@@ -6,7 +6,7 @@ import { formatRelative } from "date-fns";
 import FormEditPost from "../FormEditPost";
 import PropTypes from "prop-types";
 
-const SpotWindow = ({ selected, setSelected, panTo }) => {
+const SpotWindow = ({ selected, setSelected, panTo, labels }) => {
   const [diaryShow, setDiaryShow] = useState(false);
   const writeBtnRef = useRef(null);
   const [authWarnShow, setAuthWarnShow] = useState(false);
@@ -60,7 +60,7 @@ const SpotWindow = ({ selected, setSelected, panTo }) => {
               <Offcanvas.Title>Write a diary</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <FormEditPost location={selected} panTo={panTo} />
+              <FormEditPost location={selected} panTo={panTo} labels={labels}/>
             </Offcanvas.Body>
           </Offcanvas>
         </div>

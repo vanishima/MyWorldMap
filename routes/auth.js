@@ -126,4 +126,23 @@ router.get("/user", auth, async (req, res) => {
   }
 });
 
+/* GET labels by user */
+// router.get("/labels/:type", auth, async (req, res) => {
+//   const type = req.params.type;
+//   console.log("[auth.js] GET auth/labels");
+//   try {
+//     console.log("[auth.js] GET /user req.user:", req.user);
+
+//     const user = User.getLabels({
+//       $and: [
+//         { _id: ObjectId(req.user.id) },
+//         { labels: { $elemMatch: { name: type } } },
+//       ],
+//     });
+//     res.status(200).send(user);
+//   } catch (e) {
+//     res.status(400).send({ valid: false, msg: e.message });
+//   }
+// });
+
 module.exports = router;

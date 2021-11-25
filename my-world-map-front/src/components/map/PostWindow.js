@@ -1,13 +1,20 @@
 import { useState, useRef } from "react";
 import PropTypes from "prop-types";
-import { Button, Offcanvas, Overlay, Tooltip } from "react-bootstrap";
+import {
+  ButtonGroup,
+  Button,
+  Offcanvas,
+  Overlay,
+  Tooltip,
+  Dropdown,
+} from "react-bootstrap";
 import { InfoWindow } from "@react-google-maps/api";
 import { formatRelative } from "date-fns";
 
 import FormEditPost from "../FormEditPost";
 import myAuth from "../../authStatus";
 
-const PostWindow = ({ post, setPostSelected, panTo }) => {
+const PostWindow = ({ post, setPostSelected, panTo, labels }) => {
   const [diaryShow, setDiaryShow] = useState(false);
   const writeBtnRef = useRef(null);
   const [authWarnShow, setAuthWarnShow] = useState(false);
@@ -37,7 +44,12 @@ const PostWindow = ({ post, setPostSelected, panTo }) => {
         <div>
           <h4>{post.title}</h4>
           <p>Created {formatRelative(new Date(post.date), new Date())}</p>
-          <Button ref={writeBtnRef} variant="primary" onClick={handleShow}>
+          <Button
+            ref={writeBtnRef}
+            variant="primary"
+            onClick={handleShow}
+            className="px-2"
+          >
             Edit
           </Button>
 
@@ -63,7 +75,7 @@ const PostWindow = ({ post, setPostSelected, panTo }) => {
               <Offcanvas.Title>Edit Post</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <FormEditPost post={post} panTo={panTo} />
+              <FormEditPost post={post} panTo={panTo} labels={labels} />
             </Offcanvas.Body>
           </Offcanvas>
         </div>

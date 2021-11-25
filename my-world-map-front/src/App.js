@@ -8,6 +8,7 @@ import MyGallery from "./pages/MyGallery";
 import MyMap from "./pages/Map";
 import User from "./pages/User";
 import Home from "./pages/Home";
+import PostDetails from "./pages/PostDetails";
 
 import myAuth from "./authStatus";
 
@@ -33,6 +34,7 @@ function App() {
         <Route path="/myphotos" element={<MyGallery />} />
         <Route path="/map" element={<MyMap />} />
         <Route path="/user" element={<User />} />
+        <Route path="/postdetails" element={<PostDetails />}/>
       </Routes>
     </Router>
   );

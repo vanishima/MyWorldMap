@@ -5,7 +5,7 @@
 
 .right {
   float: right;
-  margin-right: auto;
+  margin-right: 0;
 }
 
 .center {
@@ -54,10 +54,10 @@
 }
 
 .post-filter {
-  position: absolue;
+  position: absolute;
   width: 100px;
-  top: 4rem;
-  left: 2rem;
+  top: 9rem;
+  left: 0.5rem;
   z-index: 13;
 }
 
