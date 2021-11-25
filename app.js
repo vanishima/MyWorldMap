@@ -16,11 +16,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "./my-world-map-front/build")));
 
+app.use(cors());
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "https://myworldmap.netlify.app");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+// https://myworldmap.netlify.app
+
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
 app.use("/posts", postsRouter);
-
-app.use(cors());
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === "production") {
