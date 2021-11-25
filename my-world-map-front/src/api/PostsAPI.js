@@ -19,6 +19,7 @@ function PostsAPI() {
         headers: {
           "x-auth-token": localStorage.getItem("token"),
         },
+        mode: "cors"
       });
     }
   };

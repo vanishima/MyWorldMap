@@ -13,6 +13,7 @@ function myAuth() {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem("token"),
       },
+      mode: "cors",
     });
     // console.log("[auth.verifyAuth] Got resRaw", resRaw);
     const res = await resRaw.json();
