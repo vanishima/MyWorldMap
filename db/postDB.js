@@ -52,7 +52,7 @@ function PostDB() {
 
   myDB.getPosts = async (query) => {
     const client = new MongoClient(uri, { useUnifiedTopology: true });
-    console.log("Connecting to the db");
+    console.group("Connecting to the db");
 
     try {
       await client.connect();
@@ -62,9 +62,10 @@ function PostDB() {
       console.log(COL_NAME_POST, "Collection ready, getPosts:", query);
       const posts = await col.find(query).toArray();
 
+      console.groupEnd();
       return posts;
     } finally {
-      console.log("Closing the connection");
+      console.groupEnd("Closing the connection");
       client.close();
     }
   };

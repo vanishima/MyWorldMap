@@ -10,8 +10,6 @@ import SpotWindow from "../components/map/SpotWindow";
 import PostWindow from "../components/map/PostWindow";
 
 // API
-// import PostsAPI from "../api/PostsAPI";
-// import UserAPI from "../api/UserAPI";
 import drawPosts from "../components/utils/drawPosts";
 import drawLabels from "../components/utils/drawLabels";
 
@@ -71,8 +69,8 @@ export default function Map() {
 
   useEffect(() => {
     console.log("### EFFECT ###");
-    drawPosts(setPosts, labelsSelected);
     drawLabels(setLabels);
+    drawPosts(setPosts, labelsSelected);
   }, []);
 
   if (loadError) return "Error";

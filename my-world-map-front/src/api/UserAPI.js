@@ -17,7 +17,7 @@ function UserAPI() {
     });
   };
 
-  User.register = (user) => {
+  User.register = async (user) => {
     return fetch(FRONTEND + "/auth/user", {
       method: "GET",
       headers: {
@@ -25,6 +25,18 @@ function UserAPI() {
       },
       mode: "cors",
       body: JSON.stringify(user),
+    });
+  };
+
+  User.addLabel = async (type, label) => {
+    return fetch(FRONTEND + "/auth/newlabel", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+      mode: "cors",
+      body: JSON.stringify({type: type, label: label}),
     });
   };
 

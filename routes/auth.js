@@ -126,6 +126,19 @@ router.get("/user", auth, async (req, res) => {
   }
 });
 
+/* POST create new label */
+router.post("/newLabel", auth, async (req, res) => {
+  const type = req.body.type;
+  const newLabel = req.body.label;
+  const user_id = req.user.id;
+  try{
+    const inserted_msg = await User.createLabel(user_id, type, newLabel);
+    res.status(200).send({valid: true, msg: inserted_msg});
+  } catch(e){
+    res.status(400).send({valid: false, msg:e.message});
+  }
+});
+
 /* GET labels by user */
 // router.get("/labels/:type", auth, async (req, res) => {
 //   const type = req.params.type;

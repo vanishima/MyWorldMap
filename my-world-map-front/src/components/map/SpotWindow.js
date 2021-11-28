@@ -73,6 +73,7 @@ SpotWindow.propTypes = {
   selected: PropTypes.object,
   setSelected: PropTypes.func,
   panTo: PropTypes.func,
+  label: PropTypes.array,
 };
 
 export default SpotWindow;

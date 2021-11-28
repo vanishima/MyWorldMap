@@ -1,12 +1,10 @@
 import { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import {
-  ButtonGroup,
   Button,
   Offcanvas,
   Overlay,
   Tooltip,
-  Dropdown,
 } from "react-bootstrap";
 import { InfoWindow } from "@react-google-maps/api";
 import { formatRelative } from "date-fns";
@@ -15,21 +13,22 @@ import FormEditPost from "../FormEditPost";
 import myAuth from "../../authStatus";
 
 const PostWindow = ({ post, setPostSelected, panTo, labels }) => {
-  const [diaryShow, setDiaryShow] = useState(false);
+  const [editShow, setEditShow] = useState(false);
   const writeBtnRef = useRef(null);
   const [authWarnShow, setAuthWarnShow] = useState(false);
-  // const handleClose = () => setDiaryShow(false);
-  const handleClose = () => setDiaryShow(false);
-  const handleShow = async () => {
+
+  const handleClose = () => setEditShow(false);
+  const handleEditShow = async () => {
     const res = await myAuth.verifyAuth();
-    console.log("handleShow: ", res);
+    // console.group("handleEditShow",res);
     if (res.valid) {
       // if logged in
-      setDiaryShow(true);
+      setEditShow(true);
     } else {
-      console.log("message", res.msg);
+      console.log("handleEditShow message", res.msg);
       setAuthWarnShow(true);
     }
+    // console.groupEnd();
   };
 
   return (
@@ -47,7 +46,7 @@ const PostWindow = ({ post, setPostSelected, panTo, labels }) => {
           <Button
             ref={writeBtnRef}
             variant="primary"
-            onClick={handleShow}
+            onClick={handleEditShow}
             className="px-2"
           >
             Edit
@@ -66,7 +65,7 @@ const PostWindow = ({ post, setPostSelected, panTo, labels }) => {
           </Overlay>
 
           <Offcanvas
-            show={diaryShow}
+            show={editShow}
             onHide={handleClose}
             scroll={false}
             backdrop={true}
@@ -88,6 +87,7 @@ PostWindow.propTypes = {
   post: PropTypes.object,
   setPostSelected: PropTypes.func,
   panTo: PropTypes.func,
+  label: PropTypes.array,
 };
 
 export default PostWindow;

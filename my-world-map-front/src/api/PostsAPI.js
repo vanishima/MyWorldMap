@@ -1,15 +1,18 @@
 const FRONTEND =
   process.env.NODE_ENV === "production"
     ? process.env.REACT_APP_FRONTEND_PREFIX
-    : "";
+    : ".";
 
 function PostsAPI() {
   const Posts = {};
 
   Posts.getPosts = async (label = null) => {
+    console.group("PostsAPI Posts.getPosts");
     const user = JSON.parse(localStorage.getItem("user"));
     // console.log("[Map.js] getPosts with user", user);
-    const suffix = label ? "/label/" + label : "";
+    const suffix = label ? "/label/" + label.value : "";
+    console.log("suffix:", suffix);
+    console.groupEnd();
     if (user == null) {
       return fetch(FRONTEND + "/posts/public" + suffix);
     } else {
@@ -23,6 +26,7 @@ function PostsAPI() {
         mode: "cors",
       });
     }
+
   };
 
   Posts.getPostByID = async (postID) => {

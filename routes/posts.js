@@ -44,6 +44,7 @@ router.get("/", auth, async (req, res) => {
         { "author.id": ObjectId(authorId) },
       ],
     });
+    console.log("Got posts", posts);
     res.status(200).json({ posts: posts });
   } catch (e) {
     res.status(400).json({ msg: e.message });
@@ -59,7 +60,7 @@ router.get("/label/:label", auth, async (req, res) => {
   try {
     const posts = await Post.getPosts({
       $and: [
-        { label: label },
+        { $or: [{ label: label }, { "label.value": label }] },
         {
           $or: [
             { authorId: ObjectId(authorId) },
@@ -84,7 +85,7 @@ router.get("/public/label/:label", async (req, res) => {
     const posts = await Post.getPosts({
       $and: [
         { $or: [{ isPublic: true }, { isPrivate: false }] },
-        { label: label },
+        { $or: [{ label: label }, { "label.label": label }] },
       ],
     });
     console.log("GET posts/public:", posts);

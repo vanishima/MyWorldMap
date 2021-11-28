@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 require("dotenv").config();
 
 function UserDB() {
@@ -9,7 +9,7 @@ function UserDB() {
 
   myDB.findOne = async (query = {}) => {
     const client = new MongoClient(uri, { useUnifiedTopology: true });
-    console.log("Connecting to the db");
+    console.group("Connecting to the db");
 
     try {
       await client.connect();
@@ -19,7 +19,7 @@ function UserDB() {
       console.log(COL_NAME_USER, "Collection ready, findOne:", query);
 
       const user = await col.findOne(query);
-      console.log("Found", user);
+      console.groupEnd("Found", user);
 
       return user;
     } finally {
@@ -30,7 +30,7 @@ function UserDB() {
 
   myDB.getUserById = async (query = {}) => {
     const client = new MongoClient(uri, { useUnifiedTopology: true });
-    console.log("Connecting to the db");
+    console.group("Connecting to the db");
 
     try {
       await client.connect();
@@ -40,11 +40,11 @@ function UserDB() {
       console.log(COL_NAME_USER, "Collection ready, getUserById:", query);
 
       const user = await col.findOne(query, { _id: 1, name: 1, email: 1 });
-      console.log("Found:", user);
+      console.groupEnd("Found:", user);
 
       return user;
     } finally {
-      console.log("Closing the connection");
+      console.groupEnd("Closing the connection");
       client.close();
     }
   };
@@ -66,6 +66,35 @@ function UserDB() {
       return res;
     } finally {
       // console.log("Closing the connection");
+      client.close();
+    }
+  };
+
+  myDB.createLabel = async (user_id, type, newLabel) => {
+    const client = new MongoClient(uri, { useUnifiedTopology: true });
+    console.group("UserDB.createLabel");
+    try {
+      await client.connect();
+
+      const col = client.db(DB_NAME).collection(COL_NAME_USER);
+      console.log(
+        COL_NAME_USER,
+        "Collection ready, create label for:",
+        type + " " + newLabel + " user:" + user_id
+      );
+
+      const res = await col.updateOne(
+        { _id: ObjectId(user_id), labels: { $elemMatch: { name: type } } },
+        {
+          $push: {
+            "labels.$.list": newLabel,
+          },
+        }
+      );
+      console.log("Inserted", res);
+      console.groupEnd();
+      return res;
+    } finally {
       client.close();
     }
   };

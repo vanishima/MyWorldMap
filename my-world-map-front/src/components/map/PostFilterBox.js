@@ -4,21 +4,15 @@ import { Dropdown, FormControl } from "react-bootstrap";
 
 import drawPosts from "../utils/drawPosts";
 
-const DEFAULT_FILTER_TAG = "Filter";
-
-// <a
-//           href=""
-//           ref={ref}
-//           onClick={(e) => {
-//             e.preventDefault();
-//             onClick(e);
-//           }}
-//         >
+const DEFAULT_FILTER_TAG = {value:"Filter", label: "Filter"};
 
 const PostFilterBox = (props) => {
+  console.group("PostFilterBox");
   const labels = props.labels;
+  console.log(labels);
   const setLabelsSelected = props.setLabelsSelected;
   const [filterTag, setFilterTag] = useState(DEFAULT_FILTER_TAG);
+  console.groupEnd();
 
   // The forwardRef is important!!
   // Dropdown needs access to the DOM node in order to position the Menu
@@ -30,18 +24,19 @@ const PostFilterBox = (props) => {
         e.preventDefault();
         onClick(e);
       }}
+      style={{width:"max-content"}}
     >
       {children}
       &#x25bc;
     </button>
   ));
 
+  // w-auto
   // forwardRef again here!
   // Dropdown needs access to the DOM of the Menu to measure it
   const CustomMenu = React.forwardRef(
     ({ children, style, className, "aria-labelledby": labeledBy }, ref) => {
       const [value, setValue] = useState("");
-
       return (
         <div
           ref={ref}
@@ -68,6 +63,7 @@ const PostFilterBox = (props) => {
   );
 
   const handleFilterClick = (type) => {
+    console.group("handleFilterClick");
     console.log(type, "filter clicked");
     setFilterTag(type);
     if (type !== DEFAULT_FILTER_TAG) {
@@ -77,12 +73,13 @@ const PostFilterBox = (props) => {
       setLabelsSelected(null);
       drawPosts(props.setPosts);
     }
+    console.groupEnd();
   };
 
   return (
     <Dropdown className="post-filter">
       <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-        {filterTag}
+        {filterTag.label}
       </Dropdown.Toggle>
 
       <Dropdown.Menu as={CustomMenu}>
@@ -96,7 +93,7 @@ const PostFilterBox = (props) => {
               eventKey={i}
               onClick={() => handleFilterClick(label)}
             >
-              {label}
+              {label.label}
             </Dropdown.Item>
           ))}
       </Dropdown.Menu>
@@ -118,7 +115,7 @@ const PostFilterBox = (props) => {
 
 PostFilterBox.propTypes = {
   props: PropTypes.shape({
-    labels: PropTypes.string,
+    labels: PropTypes.array,
     setLabelsSelected: PropTypes.func,
     setPosts: PropTypes.func,
   }),

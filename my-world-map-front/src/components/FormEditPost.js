@@ -2,8 +2,14 @@ import { useState } from "react";
 import { Button, Form, FloatingLabel } from "react-bootstrap";
 import PropTypes from "prop-types";
 
+// Elements
+import CreatableSelectLabel from "./utils/CreatableSelectLabel";
+
 // API
 import PostsAPI from "../api/PostsAPI";
+import UserAPI from "../api/UserAPI";
+
+const DEFAULT_LABEL = { value: "memo", label: "memo", color: "#00B8D9" };
 
 const FormEditPost = ({ location, post, panTo, labels }) => {
   const [title, setTitle] = useState(post ? post.title : "");
@@ -17,7 +23,15 @@ const FormEditPost = ({ location, post, panTo, labels }) => {
   const [isPrivate, setIsPrivate] = useState(
     post && post.isPrivate ? true : false
   );
-  const [label, setLabel] = useState(post && post.label ? post.label : "memo");
+  if (post && post.label && typeof post.label !== "object") {
+    post.label = { value: post.label, label: post.label, color: "#00B8D9" };
+  }
+  // const [currentLabel, setCurrentLabel] = useState(
+  //   post && post.label ? post.label : DEFAULT_LABEL
+  // );
+  const [currentLabel, setCurrentLabel] = useState(
+    post && post.label ? post.label : DEFAULT_LABEL
+  );
 
   const handleCheckBox = () => {
     console.log("isPrivate changed", isPrivate);
@@ -40,6 +54,20 @@ const FormEditPost = ({ location, post, panTo, labels }) => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+    console.group("handleSubmit");
+
+    // check if custom label
+    if (!labels.includes(currentLabel)) {
+      const addLabelResRaw = await UserAPI.addLabel("post", currentLabel);
+      console.log("addLabelResRaw:", addLabelResRaw);
+      const addLabelRes = await addLabelResRaw.json();
+      if (!addLabelRes.valid) {
+        console.log(addLabelRes);
+        console.log("Failed to add new label:", addLabelRes.msg);
+        return;
+      }
+    }
+
     const user = JSON.parse(localStorage.getItem("user"));
     console.log("user from localStorage", user);
     const newPost = {
@@ -50,7 +78,7 @@ const FormEditPost = ({ location, post, panTo, labels }) => {
         id: user._id,
         name: user.name,
       },
-      label: label,
+      label: currentLabel,
       isPrivate: isPrivate,
       location: post ? post.location : location,
     };
@@ -73,6 +101,7 @@ const FormEditPost = ({ location, post, panTo, labels }) => {
     } else {
       console.log("Failed to post", res.msg);
     }
+    console.groupEnd();
   };
 
   return (
@@ -121,21 +150,13 @@ const FormEditPost = ({ location, post, panTo, labels }) => {
         </FloatingLabel>
       </Form.Group>
 
-      <Form.Select aria-label="Default select example">
-        <option>{label ? label : "Set label"}</option>
-        {labels &&
-          labels.map((label, i) => (
-            <option
-              key={i}
-              value={label}
-              onChange={(e) => {
-                setLabel(e.target.value);
-              }}
-            >
-              {label}
-            </option>
-          ))}
-      </Form.Select>
+      <Form.Group className="mb-3">
+        <CreatableSelectLabel
+          options={labels}
+          setCurrentLabel={setCurrentLabel}
+          currentLabel={currentLabel}
+        />
+      </Form.Group>
 
       <Form.Group className="mb-3" controlId="formPrivateCheckbox">
         <Form.Check
@@ -159,6 +180,40 @@ const FormEditPost = ({ location, post, panTo, labels }) => {
     </Form>
   );
 };
+
+// <Form.Group className="mb-3">
+//   <Form.Select aria-label="Default select example">
+//     <option>{currentLabel ? currentLabel : "Set label"}</option>
+//     {labels &&
+//       labels.map((label, i) => (
+//         <option
+//           key={i}
+//           value={currentLabel}
+//           onChange={(e) => {
+//             setCurrentLabel(e.target.value);
+//           }}
+//         >
+//           {label.label}
+//         </option>
+//       ))}
+//   </Form.Select>
+// </Form.Group>
+
+// <Form.Group className="mb-3" controlId="formTitle">
+//   <FloatingLabel
+//     controlId="floatingTextarea"
+//     label="Custom Label"
+//     className="mb-3"
+//   >
+//     <Form.Control
+//       as="textarea"
+//       value={currentLabel}
+//       onChange={(e) => {
+//         setCurrentLabel(e.target.value);
+//       }}
+//     />
+//   </FloatingLabel>
+// </Form.Group>
 
 // <Form.Label>Privacy Level</Form.Label>
 //         <Form.Select aria-label="Default select">
