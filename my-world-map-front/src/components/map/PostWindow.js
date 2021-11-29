@@ -1,11 +1,6 @@
 import { useState, useRef } from "react";
 import PropTypes from "prop-types";
-import {
-  Button,
-  Offcanvas,
-  Overlay,
-  Tooltip,
-} from "react-bootstrap";
+import { Button, Offcanvas, Overlay, Tooltip } from "react-bootstrap";
 import { InfoWindow } from "@react-google-maps/api";
 import { formatRelative } from "date-fns";
 

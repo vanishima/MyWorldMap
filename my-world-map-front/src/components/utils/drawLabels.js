@@ -3,7 +3,7 @@ import myAuth from "../../authStatus";
 async function drawLabels(setLabels) {
   const resRaw = await myAuth.verifyAuth();
 
-  console.group("drawLabels",resRaw);
+  console.group("drawLabels", resRaw);
   if (resRaw.valid) {
     const labels_list = await resRaw.user.labels;
 

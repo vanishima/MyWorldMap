@@ -7,8 +7,8 @@ import CreatableSelect from "react-select/creatable";
 //   value: string;
 //   label: string;
 //   color: string;
-  // isFixed?: boolean;
-  // isDisabled?: boolean;
+// isFixed?: boolean;
+// isDisabled?: boolean;
 // }
 
 // const colourOptions = [

@@ -60,7 +60,7 @@ const SpotWindow = ({ selected, setSelected, panTo, labels }) => {
               <Offcanvas.Title>Write a diary</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <FormEditPost location={selected} panTo={panTo} labels={labels}/>
+              <FormEditPost location={selected} panTo={panTo} labels={labels} />
             </Offcanvas.Body>
           </Offcanvas>
         </div>

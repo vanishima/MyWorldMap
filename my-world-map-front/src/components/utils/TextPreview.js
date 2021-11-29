@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const MAX_TEXT = 40;
 
-const TextPreview = ({rawText}) => {
+const TextPreview = ({ rawText }) => {
   const text =
     rawText.length < MAX_TEXT
       ? rawText

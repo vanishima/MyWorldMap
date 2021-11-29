@@ -3,6 +3,10 @@
   color: #000000;
 }
 
+.gray {
+  color: gray;
+}
+
 .right {
   float: right;
   margin-right: 0;
@@ -25,7 +29,7 @@
 
 .search {
   position: absolute;
-  top: 4rem;
+  top: 3rem;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -37,6 +41,7 @@
   padding: 0.5rem;
   font-size: 1.5rem;
   width: 100%;
+  font-size: 20px;
 }
 
 .locate {
@@ -60,4 +65,3 @@
   left: 0.5rem;
   z-index: 13;
 }
-

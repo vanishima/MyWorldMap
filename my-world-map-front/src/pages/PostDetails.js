@@ -41,7 +41,9 @@ const PostDetails = () => {
             ? formatRelative(new Date(post.date), new Date())
             : post.date}
         </small>
-        <div className="my-2" style={{"whiteSpace": "pre-line"}}>{post.content}</div>
+        <div className="my-2" style={{ whiteSpace: "pre-line" }}>
+          {post.content}
+        </div>
       </div>
     </Layout>
   );

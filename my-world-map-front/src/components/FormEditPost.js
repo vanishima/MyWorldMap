@@ -11,24 +11,29 @@ import UserAPI from "../api/UserAPI";
 
 const DEFAULT_LABEL = { value: "memo", label: "memo", color: "#00B8D9" };
 
+/* Return ISO String in local time */
+function isoDateWithoutTimezone(date) {
+  if (date == null) return date;
+  let timestamp = date.getTime() - date.getTimezoneOffset() * 60000;
+  let correctDate = new Date(timestamp);
+  return correctDate.toISOString();
+}
+
 const FormEditPost = ({ location, post, panTo, labels }) => {
   const [title, setTitle] = useState(post ? post.title : "");
   const [date, setDate] = useState(
     post
       ? new Date(post.date).toISOString().slice(0, -3)
-      : new Date().toISOString().slice(0, -3)
+      : isoDateWithoutTimezone(location.time).slice(0, -3)
   );
   const [content, setContent] = useState(post ? post.content : "");
-  // const isPrivateRef = useRef(null);
   const [isPrivate, setIsPrivate] = useState(
     post && post.isPrivate ? true : false
   );
+
   if (post && post.label && typeof post.label !== "object") {
     post.label = { value: post.label, label: post.label, color: "#00B8D9" };
   }
-  // const [currentLabel, setCurrentLabel] = useState(
-  //   post && post.label ? post.label : DEFAULT_LABEL
-  // );
   const [currentLabel, setCurrentLabel] = useState(
     post && post.label ? post.label : DEFAULT_LABEL
   );

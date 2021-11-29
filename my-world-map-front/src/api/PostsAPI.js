@@ -26,16 +26,15 @@ function PostsAPI() {
         mode: "cors",
       });
     }
-
   };
 
   Posts.getPostByID = async (postID) => {
     return fetch(FRONTEND + "/posts/" + postID, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      mode: "cors"
+      mode: "cors",
     });
   };
 

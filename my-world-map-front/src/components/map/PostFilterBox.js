@@ -4,7 +4,7 @@ import { Dropdown, FormControl } from "react-bootstrap";
 
 import drawPosts from "../utils/drawPosts";
 
-const DEFAULT_FILTER_TAG = {value: "Filter", label: "Filter"};
+const DEFAULT_FILTER_TAG = { value: "Filter", label: "Filter" };
 
 const PostFilterBox = (props) => {
   console.group("PostFilterBox");
@@ -24,7 +24,7 @@ const PostFilterBox = (props) => {
         e.preventDefault();
         onClick(e);
       }}
-      style={{width:"max-content"}}
+      style={{ width: "max-content" }}
     >
       {children}
       &#x25bc;
@@ -46,7 +46,9 @@ const PostFilterBox = (props) => {
           <FormControl
             autoFocus
             className="mx-3 my-2 w-auto"
-            placeholder={labels ? "Type to filter..." : "Log in to see filters..."}
+            placeholder={
+              labels ? "Type to filter..." : "Log in to see filters..."
+            }
             onChange={(e) => setValue(e.target.value)}
             value={value}
           />

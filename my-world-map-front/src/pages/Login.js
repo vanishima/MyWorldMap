@@ -1,7 +1,6 @@
 import Layout from "../components/Layout";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import myAuth from "../authStatus";
 
 // API
 import UserAPI from "../api/UserAPI";
@@ -44,9 +43,16 @@ const Login = () => {
     <Layout>
       <div className="container">
         <div className="row">
-          <div className="col-auto">
-            <button onClick={myAuth.verifyAuth}>check authentication</button>
-
+          <div
+            className="col-auto"
+            style={{
+              "margin-top": "5rem",
+              padding: "10px",
+              height: "fit-content",
+              "background-color": "#2F4F4F",
+              color: "white",
+            }}
+          >
             <h4>Test user</h4>
             <p>
               email: aaa@gmail.com <br />

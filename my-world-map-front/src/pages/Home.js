@@ -7,7 +7,7 @@ const Home = () => {
         <h2>Welcom to My World Map App</h2>
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

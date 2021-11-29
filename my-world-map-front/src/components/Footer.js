@@ -1,17 +1,26 @@
 const Footer = () => {
   return (
     <footer className="container">
-      <div>
+      <br />
+      <div className="gray mb-2">
         Icons made by{" "}
-        <a href="https://www.freepik.com" title="Freepik">
+        <a
+          className="none-style gray"
+          href="https://www.freepik.com"
+          title="Freepik"
+        >
           Freepik
         </a>{" "}
         from{" "}
-        <a href="https://www.flaticon.com/" title="Flaticon">
+        <a
+          className="none-style gray"
+          href="https://www.flaticon.com/"
+          title="Flaticon"
+        >
           www.flaticon.com
         </a>
       </div>
-      <p>Copyright &copy; 2021 Made by Shushu Chen 🐡</p>
+      <p>Copyright &copy; 2021 Shushu Chen 🐡</p>
     </footer>
   );
 };

@@ -65,13 +65,13 @@ export default function Map() {
 
   const panTo = useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(18);
+    mapRef.current.setZoom(16);
   }, []);
 
   useEffect(() => {
     console.log("### EFFECT ###");
     drawLabels(setLabels);
-    drawPosts(setPosts, labelsSelected);
+    drawPosts(setPosts, labelsSelected, null, null);
   }, [labelsSelected]);
 
   if (loadError) return "Error";

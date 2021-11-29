@@ -52,6 +52,7 @@ const Search = ({ panTo }) => {
           onChange={handleInput}
           disabled={!ready}
           placeholder="Enter an address"
+          className="form-control"
         />
         <ComboboxPopover>
           <ComboboxList>

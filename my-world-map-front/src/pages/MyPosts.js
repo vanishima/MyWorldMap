@@ -47,7 +47,6 @@ const MyPosts = () => {
           totalPosts={posts.length}
           paginate={paginate}
         />
-
       </div>
     </Layout>
   );

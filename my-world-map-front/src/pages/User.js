@@ -5,10 +5,9 @@ const User = () => {
     <Layout>
       <div className="container">
         <h1>User's page</h1>
-      
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default User
+export default User;

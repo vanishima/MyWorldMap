@@ -25,7 +25,7 @@ Pagination.propTypes = {
     postsPerPage: PropTypes.number,
     totalPosts: PropTypes.number,
     paginate: PropTypes.func,
-  })
+  }),
 };
 
 export default Pagination;

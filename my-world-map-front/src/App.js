@@ -20,21 +20,20 @@ function App() {
     return () => {
       myAuth.verifyAuth();
     };
-  }, [])
+  }, []);
 
   return (
     <Router>
-      <div className="App">
-      </div>
+      <div className="App"></div>
       <Routes>
-        <Route path="/" element={<Home/>}/>
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/myposts" element={<MyPosts />} />
         <Route path="/myphotos" element={<MyGallery />} />
         <Route path="/map" element={<MyMap />} />
         <Route path="/user" element={<User />} />
-        <Route path="/postdetails" element={<PostDetails />}/>
+        <Route path="/postdetails" element={<PostDetails />} />
       </Routes>
     </Router>
   );

@@ -36,7 +36,7 @@ function UserAPI() {
         "x-auth-token": localStorage.getItem("token"),
       },
       mode: "cors",
-      body: JSON.stringify({type: type, label: label}),
+      body: JSON.stringify({ type: type, label: label }),
     });
   };
 
