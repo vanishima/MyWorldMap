@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const MAX_TEXT = 13;
+const MAX_TEXT = 40;
 
 const TextPreview = ({rawText}) => {
   const text =

@@ -4,12 +4,12 @@ import { Dropdown, FormControl } from "react-bootstrap";
 
 import drawPosts from "../utils/drawPosts";
 
-const DEFAULT_FILTER_TAG = {value:"Filter", label: "Filter"};
+const DEFAULT_FILTER_TAG = {value: "Filter", label: "Filter"};
 
 const PostFilterBox = (props) => {
   console.group("PostFilterBox");
   const labels = props.labels;
-  console.log(labels);
+  console.log("labels:", labels);
   const setLabelsSelected = props.setLabelsSelected;
   const [filterTag, setFilterTag] = useState(DEFAULT_FILTER_TAG);
   console.groupEnd();
@@ -31,7 +31,6 @@ const PostFilterBox = (props) => {
     </button>
   ));
 
-  // w-auto
   // forwardRef again here!
   // Dropdown needs access to the DOM of the Menu to measure it
   const CustomMenu = React.forwardRef(
@@ -47,7 +46,7 @@ const PostFilterBox = (props) => {
           <FormControl
             autoFocus
             className="mx-3 my-2 w-auto"
-            placeholder="Type to filter..."
+            placeholder={labels ? "Type to filter..." : "Log in to see filters..."}
             onChange={(e) => setValue(e.target.value)}
             value={value}
           />

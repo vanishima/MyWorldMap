@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import { formatRelative } from "date-fns";
 
 // Elements
@@ -42,12 +41,10 @@ const PostDetails = () => {
             ? formatRelative(new Date(post.date), new Date())
             : post.date}
         </small>
-        <div className="my-2" style={{"white-space": "pre-line"}}>{post.content}</div>
+        <div className="my-2" style={{"whiteSpace": "pre-line"}}>{post.content}</div>
       </div>
     </Layout>
   );
 };
-
-PostDetails.propTypes = {};
 
 export default PostDetails;

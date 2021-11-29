@@ -39,12 +39,13 @@ export default function Map() {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
-  const [labels, setLabels] = useState(["eat", "memo", "photo spot"]);
+  const [labels, setLabels] = useState(null);
   const [labelsSelected, setLabelsSelected] = useState(null);
   const [markers, setMarkers] = useState([]);
   const [posts, setPosts] = useState([]);
   const [selected, setSelected] = useState(null);
   const [postSelected, setPostSelected] = useState(null);
+
   const onMapClick = useCallback((e) => {
     console.log(e);
     setMarkers((current) => [
@@ -71,7 +72,7 @@ export default function Map() {
     console.log("### EFFECT ###");
     drawLabels(setLabels);
     drawPosts(setPosts, labelsSelected);
-  }, []);
+  }, [labelsSelected]);
 
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";

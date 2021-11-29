@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Card } from "react-bootstrap";
-import { formatRelative } from "date-fns";
 
 // Elements
 import Layout from "../components/Layout";
-import TextPreview from "../components/utils/TextPreview";
+import PostsList from "../components/PostsList";
+import Pagination from "../components/Pagination";
 
 // API
 import PostsAPI from "../api/PostsAPI";
@@ -21,38 +19,35 @@ async function drawPosts(setPosts) {
 
 const MyPosts = () => {
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(10);
 
   useEffect(() => {
     console.log("### EFFECT ###");
-    drawPosts(setPosts);
+    drawPosts(setPosts, setLoading);
   }, []);
+
+  // Get current posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <Layout>
       <div className="container">
         <h2>My Posts</h2>
-        <Link to="/formNewBlog">
-          <button className="btn btn-outline-success">Create new post</button>
-        </Link>
-        <div className="row">
-          {posts &&
-            posts.map((post, i) => (
-              <Card key={post._id} className="mb-2 me-2 col-4 post-card">
-                <Card.Body>
-                  <Link
-                    to={{ pathname: "/postDetails", search: "postID=" + post._id }}
-                    className="none-style"
-                  >
-                    <Card.Title href="/">{post.title}</Card.Title>
-                  </Link>
-                  <small className="mb-2 text-muted">
-                    Posted {formatRelative(new Date(post.date), new Date())}
-                  </small>
-                  <TextPreview rawText={post.content} />
-                </Card.Body>
-              </Card>
-            ))}
-        </div>
+
+        <PostsList posts={currentPosts} loading={loading} />
+        <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={posts.length}
+          paginate={paginate}
+        />
+
       </div>
     </Layout>
   );
