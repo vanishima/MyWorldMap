@@ -1,3 +1,4 @@
+import Layout from "../components/Layout";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../stylesheets/registerLogin.css";
@@ -38,7 +39,7 @@ const Register = () => {
   };
 
   return (
-    <div className="registration">
+    <Layout className="registration">
       <form className="registerLoginDiv center" onSubmit={handleSubmit}>
         <h2>Create Account</h2>
         <div className="form-group form-control">
@@ -89,7 +90,7 @@ const Register = () => {
           </Link>
         </div>
       </form>
-    </div>
+    </Layout>
   );
 };
 

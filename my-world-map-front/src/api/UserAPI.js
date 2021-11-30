@@ -18,8 +18,8 @@ function UserAPI() {
   };
 
   User.register = async (user) => {
-    return fetch(FRONTEND + "/auth/user", {
-      method: "GET",
+    return fetch(FRONTEND + "/auth/register", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
