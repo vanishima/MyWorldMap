@@ -1,6 +1,7 @@
-# MyWorldMap
+# [MyWorldMap](https://myworldmap.netlify.app/)
 
-A map-based personal memo App with Node + Express + Mongo + React (hooks)
+A map-based personal memo App with Node + Express + Mongo + React (hooks).  
+**Deployed site**: https://myworldmap.netlify.app/
 
 ## Author
 
