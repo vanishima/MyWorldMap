@@ -32,7 +32,7 @@ Instructor: [John Alexis Guerra Gómez](https://johnguerra.co/)
 
 ## Video demo
 
-https://youtu.be/IblCkvUTTZc
+https://youtu.be/VEIjh7Rc74I
 
 ## Slides
 
