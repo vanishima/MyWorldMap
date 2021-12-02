@@ -38,6 +38,5 @@ function App() {
     </Router>
   );
 }
-// <Header />
-// <Footer />
+
 export default App;
