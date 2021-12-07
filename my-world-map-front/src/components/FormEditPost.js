@@ -37,6 +37,7 @@ const FormEditPost = ({ location, post, panTo, labels }) => {
   const [currentLabel, setCurrentLabel] = useState(
     post && post.label ? post.label : DEFAULT_LABEL
   );
+  const oldLabelVal = currentLabel ? currentLabel.value : null;
 
   const handleCheckBox = () => {
     console.log("isPrivate changed", isPrivate);
@@ -61,9 +62,12 @@ const FormEditPost = ({ location, post, panTo, labels }) => {
     evt.preventDefault();
     console.group("handleSubmit");
 
-    // check if custom label
-    if (!labels.includes(currentLabel)) {
-      const addLabelResRaw = await UserAPI.addLabel("post", currentLabel);
+    // currentLabel.value = currentLabel.value.toLowerCase();
+    const exists = labels.find(label => label.value === currentLabel.value);
+    // check if need to create new label
+    if (!exists) {
+      currentLabel.value = currentLabel.value.toLowerCase();
+      const addLabelResRaw = await UserAPI.addLabel(currentLabel);
       console.log("addLabelResRaw:", addLabelResRaw);
       const addLabelRes = await addLabelResRaw.json();
       if (!addLabelRes.valid) {
@@ -71,6 +75,8 @@ const FormEditPost = ({ location, post, panTo, labels }) => {
         console.log("Failed to add new label:", addLabelRes.msg);
         return;
       }
+    } else {
+      setCurrentLabel(exists);
     }
 
     const user = JSON.parse(localStorage.getItem("user"));
@@ -101,8 +107,17 @@ const FormEditPost = ({ location, post, panTo, labels }) => {
 
     if (resRaw.ok) {
       console.log("successfully created post");
+
+      console.log(`label: ${oldLabelVal} vs. ${currentLabel.value}`);
+      if (oldLabelVal !== currentLabel.value){
+        await UserAPI.incrementLabel(oldLabelVal, -1);
+        await UserAPI.incrementLabel(currentLabel.value, 1);
+      } else {
+        await UserAPI.incrementLabel(currentLabel.value, 1);
+      }
+
       document.location.href = "/map";
-      panTo(location ? location : post.location);
+      // panTo(location ? location : post.location);
     } else {
       console.log("Failed to post", res.msg);
     }

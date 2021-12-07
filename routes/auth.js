@@ -128,13 +128,40 @@ router.get("/user", auth, async (req, res) => {
 
 /* POST create new label */
 router.post("/newLabel", auth, async (req, res) => {
-  const type = req.body.type;
   const newLabel = req.body.label;
   const user_id = req.user.id;
   try {
-    const inserted_msg = await User.createLabel(user_id, type, newLabel);
+    const inserted_msg = await User.createLabel(user_id, newLabel);
     res.status(200).send({ valid: true, msg: inserted_msg });
   } catch (e) {
+    res.status(400).send({ valid: false, msg: e.message });
+  }
+});
+
+/* POST create new label */
+router.post("/incrLabel", auth, async (req, res) => {
+  const label = req.body.label;
+  const num = req.body.num;
+  const user_id = req.user.id;
+  try {
+    const inserted_msg = await User.incrementLabel(user_id, label, num);
+    res.status(200).send({ valid: true, msg: inserted_msg });
+  } catch (e) {
+    res.status(400).send({ valid: false, msg: e.message });
+  }
+});
+
+/* GET label counts */
+router.get("/labelCounts", auth, async (req, res) => {
+  console.group("===== Enter /auth/labelCounts");
+  const user_id = req.user.id;
+  console.log("user.id", user_id);
+  try {
+    const labelCounts = await User.getLabelCounts(user_id);
+    console.groupEnd("labelCounts",labelCounts);
+    res.status(200).send({ valid: true, labelCounts: labelCounts });
+  } catch (e) {
+    console.groupEnd(e.message);
     res.status(400).send({ valid: false, msg: e.message });
   }
 });

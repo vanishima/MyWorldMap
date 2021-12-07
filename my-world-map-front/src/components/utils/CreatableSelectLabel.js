@@ -55,27 +55,28 @@ import CreatableSelect from "react-select/creatable";
 
 const CreatableSelectLabel = (props) => {
   const currentLabel = props.currentLabel;
-  console.group("CreatableSelectLabel", currentLabel);
+  // console.group("CreatableSelectLabel", currentLabel);
   // console.log(typeof currentLabel + "currentLabel", currentLabel);
   const defaultValue =
     typeof currentLabel === "object"
       ? currentLabel
       : { value: "orange", label: "Orange", color: "#FF8B00" };
-  console.log("defaultValue", defaultValue);
-  console.groupEnd();
+  // console.log("defaultValue", defaultValue);
+  // console.groupEnd();
 
   // const defaultValue = { value: "orange", label: "Orange", color: "#FF8B00" };
   const handleChange = (newValue, actionMeta) => {
-    // console.group("Value Changed");
-    // console.log(newValue);
-    // console.log(`action: ${actionMeta.action}`);
-    // console.groupEnd();
+    console.group("Value Changed");
+    console.log(newValue);
+    console.log(newValue.value.toLowerCase());
+    console.log(`action: ${actionMeta.action}`);
+    console.groupEnd();
     props.setCurrentLabel(newValue);
   };
 
   const handleInputChange = (inputValue: any, actionMeta: any) => {
     console.group("Input Changed");
-    console.log(inputValue);
+    console.log("inputValue", inputValue);
     console.log(`action: ${actionMeta.action}`);
     console.groupEnd();
   };

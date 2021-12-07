@@ -7,12 +7,12 @@ import drawPosts from "../utils/drawPosts";
 const DEFAULT_FILTER_TAG = { value: "Filter", label: "Filter" };
 
 const PostFilterBox = (props) => {
-  console.group("PostFilterBox");
+  // console.group("PostFilterBox");
   const labels = props.labels;
-  console.log("labels:", labels);
+  // console.log("labels:", labels);
   const setLabelsSelected = props.setLabelsSelected;
   const [filterTag, setFilterTag] = useState(DEFAULT_FILTER_TAG);
-  console.groupEnd();
+  // console.groupEnd();
 
   // The forwardRef is important!!
   // Dropdown needs access to the DOM node in order to position the Menu
@@ -78,27 +78,29 @@ const PostFilterBox = (props) => {
   };
 
   return (
-    <Dropdown className="post-filter">
-      <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-        {filterTag.label}
-      </Dropdown.Toggle>
+    <div className="post-filter">
+      <Dropdown>
+        <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+          {filterTag.label}
+        </Dropdown.Toggle>
 
-      <Dropdown.Menu as={CustomMenu}>
-        <Dropdown.Item onClick={() => handleFilterClick(DEFAULT_FILTER_TAG)}>
-          All
-        </Dropdown.Item>
-        {labels &&
-          labels.map((label, i) => (
-            <Dropdown.Item
-              key={i}
-              eventKey={i}
-              onClick={() => handleFilterClick(label)}
-            >
-              {label.label}
-            </Dropdown.Item>
-          ))}
-      </Dropdown.Menu>
-    </Dropdown>
+        <Dropdown.Menu as={CustomMenu}>
+          <Dropdown.Item onClick={() => handleFilterClick(DEFAULT_FILTER_TAG)}>
+            All
+          </Dropdown.Item>
+          {labels &&
+            labels.map((label, i) => (
+              <Dropdown.Item
+                key={i}
+                eventKey={i}
+                onClick={() => handleFilterClick(label)}
+              >
+                {label.label}
+              </Dropdown.Item>
+            ))}
+        </Dropdown.Menu>
+      </Dropdown>
+    </div>
   );
 };
 

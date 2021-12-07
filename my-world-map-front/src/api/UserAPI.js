@@ -28,7 +28,7 @@ function UserAPI() {
     });
   };
 
-  User.addLabel = async (type, label) => {
+  User.addLabel = async (label) => {
     return fetch(FRONTEND + "/auth/newlabel", {
       method: "POST",
       headers: {
@@ -36,9 +36,32 @@ function UserAPI() {
         "x-auth-token": localStorage.getItem("token"),
       },
       mode: "cors",
-      body: JSON.stringify({ type: type, label: label }),
+      body: JSON.stringify({ label: label }),
     });
   };
+
+  User.incrementLabel = async (label, num) => {
+    return fetch(FRONTEND + "/auth/incrLabel", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+      mode: "cors",
+      body: JSON.stringify({ label: label, num: num }),
+    });
+  }
+
+  User.getLabelCounts = async ()=> {
+    console.log("UserAPI.getLabelCounts");
+    return fetch(FRONTEND + "/auth/labelCounts", {
+      method: "GET",
+      headers: {
+        "x-auth-token": localStorage.getItem("token"),
+      },
+      mode: "cors",
+    });
+  }
 
   return User;
 }

@@ -17,7 +17,7 @@ function PostDB() {
 
       // console.log(await listDatabases(client));
 
-      const col = client.db(DB_NAME).collection("Users");
+      const col = client.db(DB_NAME).collection(COL_NAME_POST);
       console.log(COL_NAME_POST, "Collection ready, findOne:", query);
 
       const user = await col.findOne(query);
@@ -43,6 +43,9 @@ function PostDB() {
       const res = await col.insertOne(post);
       console.log("Inserted", res);
 
+      // const resLabel = await UserDB.incrementLabel(post.author.id, post.label);
+      // console.log("incremented", resLabel);
+
       return res;
     } finally {
       // console.log("Closing the connection");
@@ -59,7 +62,7 @@ function PostDB() {
       console.log("Connected!");
 
       const col = client.db(DB_NAME).collection(COL_NAME_POST);
-      console.log(COL_NAME_POST, "Collection ready, getPosts:", query);
+      // console.log(COL_NAME_POST, "Collection ready, getPosts:", query);
       const posts = await col.find(query).toArray();
 
       console.groupEnd();

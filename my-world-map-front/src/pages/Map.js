@@ -5,20 +5,20 @@ import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import Layout from "../components/Layout";
 import Search from "../components/map/Search";
 import Locate from "../components/map/Locate";
-import PostFilterBox from "../components/map/PostFilterBox";
-import SpotWindow from "../components/map/SpotWindow";
+// import PostFilterBox from "../components/map/PostFilterBox";
 import PostWindow from "../components/map/PostWindow";
+import LabelButtons from "../components/map/LabelButtons";
 
 // API
 import drawPosts from "../components/utils/drawPosts";
-import drawLabels from "../components/utils/drawLabels";
+import fetchLabels from "../components/utils/fetchLabels";
 
 // Styles
 import "@reach/combobox/styles.css";
 import mapStyles from "../mapStyles";
 
 // Constants
-const libraries = ["places"];
+const libraries = ["places", "drawing"];
 const mapContainerStyle = {
   height: "80vh",
   width: "100vw",
@@ -27,7 +27,7 @@ const options = {
   styles: mapStyles,
   disableDefaultUI: true,
   zoomControl: true,
-  mapTypeControl: true,
+  // mapTypeControl: true,
 };
 const center = {
   lat: 37.338207,
@@ -70,7 +70,7 @@ export default function Map() {
 
   useEffect(() => {
     console.log("### EFFECT ###");
-    drawLabels(setLabels);
+    fetchLabels(setLabels);
     drawPosts(setPosts, labelsSelected, null, null);
   }, [labelsSelected]);
 
@@ -84,12 +84,22 @@ export default function Map() {
   //         </span>
   //       </h4>
   //
+
   return (
     <Layout>
-      <PostFilterBox
+      <h1 className="overlay-bottom">Map with markers</h1>
+
+      {/*<PostFilterBox
         labels={labels}
         setLabelsSelected={setLabelsSelected}
         setPosts={setPosts}
+      />*/}
+
+      <LabelButtons
+        labels={labels}
+        setLabelsSelected={setLabelsSelected}
+        setPosts={setPosts}
+        drawPosts={drawPosts}
       />
       <Locate panTo={panTo} />
       <Search panTo={panTo} />
@@ -103,18 +113,26 @@ export default function Map() {
         onClick={onMapClick}
         onLoad={onMapLoad}
       >
-        {markers.map((marker) => (
+        {markers.map((marker, i) => (
           <Marker
             key={`${marker.lat}-${marker.lng}`}
+            title={`${i}`}
+            // label={`${i}`}
+            animation={window.google.maps.Animation.DROP}
             position={{ lat: marker.lat, lng: marker.lng }}
             onClick={() => {
               setSelected(marker);
             }}
+            onMouseOver={(e) => {
+              setSelected(marker);
+              setPostSelected(null);
+              // setTimeout( () => {setSelected(null); }, 1000);
+            }}
             icon={{
-              url: "/icons/sunfish-1.png",
+              url: "/icons/panda.png",
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(15, 15),
-              scaledSize: new window.google.maps.Size(30, 30),
+              scaledSize: new window.google.maps.Size(35, 35),
             }}
           />
         ))}
@@ -123,16 +141,24 @@ export default function Map() {
           posts.map((post, i) => (
             <Marker
               key={`${post.location.lat}-${post.location.lng}-${post.location.time}-${i}`}
+              title={`${i}`}
+              // label={`${i}`}
+              animation={window.google.maps.Animation.DROP}
               position={{ lat: post.location.lat, lng: post.location.lng }}
               onClick={() => {
-                // console.log("post clicked", post);
                 setPostSelected(post);
               }}
+              onMouseOver={(e) => {
+                setPostSelected(post);
+                setSelected(null);
+                // setTimeout( () => {setPostSelected(null); }, 1000);
+              }}
+              onMoustOut={{}}
               icon={{
-                url: "/icons/dinosaur.png",
+                url: "/icons/dinosaur-1.png",
                 origin: new window.google.maps.Point(0, 0),
                 anchor: new window.google.maps.Point(15, 15),
-                scaledSize: new window.google.maps.Size(35, 35),
+                scaledSize: new window.google.maps.Size(40, 40),
               }}
             />
           ))}
@@ -143,13 +169,14 @@ export default function Map() {
             setPostSelected={setPostSelected}
             panTo={panTo}
             labels={labels}
+            className="postWindow"
           />
         ) : null}
 
         {selected ? (
-          <SpotWindow
+          <PostWindow
             selected={selected}
-            setSelected={setSelected}
+            setPostSelected={setPostSelected}
             panTo={panTo}
             labels={labels}
           />

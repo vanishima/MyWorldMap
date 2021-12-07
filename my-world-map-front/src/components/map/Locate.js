@@ -18,7 +18,7 @@ const Locate = ({ panTo }) => {
       }}
     >
       <img src="/icons/bi-compass-fill.svg" alt="compass - locate me" />
-      <span className="tooltiptext"> Click to locate</span>
+      <span className="tooltiptext"></span>
     </button>
   );
 };

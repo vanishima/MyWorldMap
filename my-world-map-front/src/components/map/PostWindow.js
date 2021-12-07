@@ -7,37 +7,41 @@ import { formatRelative } from "date-fns";
 import FormEditPost from "../FormEditPost";
 import myAuth from "../../authStatus";
 
-const PostWindow = ({ post, setPostSelected, panTo, labels }) => {
+const PostWindow = ({ selected, post, setPostSelected, panTo, labels }) => {
   const [editShow, setEditShow] = useState(false);
   const writeBtnRef = useRef(null);
   const [authWarnShow, setAuthWarnShow] = useState(false);
 
+  const lat = selected ? selected.lat : post.location.lat;
+  const lng = selected ? selected.lng : post.location.lng;
+  const date = selected ? selected.time : new Date(post.date);
+
   const handleClose = () => setEditShow(false);
   const handleEditShow = async () => {
     const res = await myAuth.verifyAuth();
-    // console.group("handleEditShow",res);
     if (res.valid) {
-      // if logged in
       setEditShow(true);
     } else {
       console.log("handleEditShow message", res.msg);
       setAuthWarnShow(true);
     }
-    // console.groupEnd();
   };
 
   return (
     <div>
       <InfoWindow
-        position={{ lat: post.location.lat, lng: post.location.lng }}
+        position={{
+          lat: lat,
+          lng: lng,
+        }}
         onCloseClick={() => {
           console.log("InfoWindow close click");
           setPostSelected(null);
         }}
       >
         <div>
-          <h4>{post.title}</h4>
-          <p>Created {formatRelative(new Date(post.date), new Date())}</p>
+          <h2>{selected ? "New post" : post.title}</h2>
+          <p>Created {formatRelative(date, new Date())}</p>
           <Button
             ref={writeBtnRef}
             variant="primary"
@@ -69,7 +73,15 @@ const PostWindow = ({ post, setPostSelected, panTo, labels }) => {
               <Offcanvas.Title>Edit Post</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <FormEditPost post={post} panTo={panTo} labels={labels} />
+              {selected ? (
+                <FormEditPost
+                  location={selected}
+                  panTo={panTo}
+                  labels={labels}
+                />
+              ) : (
+                <FormEditPost post={post} panTo={panTo} labels={labels} />
+              )}
             </Offcanvas.Body>
           </Offcanvas>
         </div>
@@ -79,6 +91,7 @@ const PostWindow = ({ post, setPostSelected, panTo, labels }) => {
 };
 
 PostWindow.propTypes = {
+  selected: PropTypes.object,
   post: PropTypes.object,
   setPostSelected: PropTypes.func,
   panTo: PropTypes.func,

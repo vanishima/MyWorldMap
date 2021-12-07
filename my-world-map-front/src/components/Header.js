@@ -27,7 +27,6 @@ const Header = () => {
             <Nav className="me-auto">
               <Nav.Link href="/map">Map</Nav.Link>
               <Nav.Link href="/myposts">Posts</Nav.Link>
-              {user && <Nav.Link href="/myphotos">Gallery</Nav.Link>}
             </Nav>
           </Navbar.Collapse>
 
