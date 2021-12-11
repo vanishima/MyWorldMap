@@ -5,11 +5,9 @@ import { formatRelative } from "date-fns";
 
 // Elements
 import TextPreview from "../components/utils/TextPreview";
+import LocateTo from "../components/map/LocateTo";
 
-const PostsList = ({ posts, loading }) => {
-  if (loading) {
-    return <h2>Loading</h2>;
-  }
+const PostsGrid = ({ posts, panTo }) => {
 
   return (
     <ul className="list-group mb-4">
@@ -21,24 +19,37 @@ const PostsList = ({ posts, loading }) => {
               search: "postID=" + post._id,
             }}
             className="none-style"
+            target="_blank"
           >
-            <h2>{post.title}</h2>
+            <h2 style={{ fontSize: "15px" }}>{post.title ? post.title : "(no title)"}</h2>
           </Link>
 
-          <small className="text-muted">
+          <div className="text-muted" style={{ fontSize: "10px" }}>
             Posted {formatRelative(new Date(post.date), new Date())}
-          </small>
-          <TextPreview rawText={post.content} />
+          </div>
+          <div className="row">
+            <div className="col-10">
+              <TextPreview
+                rawText={post.content}
+                fontSize={"12px"}
+                maxText={47}
+              />
+            </div>
+            <div className="col-2 right">
+              <LocateTo panTo={panTo} location={post.location} />
+            </div>
+          </div>
         </li>
       ))}
     </ul>
   );
 };
 
-PostsList.propTypes = {
+PostsGrid.propTypes = {
   props: PropTypes.shape({
     posts: PropTypes.array,
-    loading: PropTypes.bool,
+    panTo: PropTypes.func,
+    // setPostSelected: PropTypes.func
   }),
 };
 
@@ -64,4 +75,4 @@ PostsList.propTypes = {
 //   ))}
 // }
 
-export default PostsList;
+export default PostsGrid;

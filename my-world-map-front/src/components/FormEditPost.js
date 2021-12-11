@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Form, FloatingLabel } from "react-bootstrap";
 import PropTypes from "prop-types";
 
@@ -34,15 +35,27 @@ const FormEditPost = ({ location, post, panTo, labels }) => {
   if (post && post.label && typeof post.label !== "object") {
     post.label = { value: post.label, label: post.label, color: "#00B8D9" };
   }
-  const [currentLabel, setCurrentLabel] = useState(
-    post && post.label ? post.label : DEFAULT_LABEL
-  );
+  let tempLabel;
+  if (post && post.label){
+    tempLabel = post.label;
+  } else if (labels){
+    tempLabel = labels[0];
+  } else {
+    tempLabel = DEFAULT_LABEL;
+  }
+  const [currentLabel, setCurrentLabel] = useState(tempLabel);
   const oldLabelVal = currentLabel ? currentLabel.value : null;
 
+  const navigate = useNavigate();
+
   const handleCheckBox = () => {
-    console.log("isPrivate changed", isPrivate);
-    setIsPrivate(!isPrivate);
+    console.log("isPrivate before", isPrivate);
+    const temp = isPrivate;
+    setIsPrivate(!temp);
+    console.log("isPrivate after", isPrivate);
   };
+
+  console.log(post);
 
   const handleDelete = async (evt) => {
     evt.preventDefault();
@@ -52,7 +65,7 @@ const FormEditPost = ({ location, post, panTo, labels }) => {
 
     if (resRaw.ok) {
       console.log("successfully deleted post");
-      document.location.href = "/map";
+      navigate(0);
     } else {
       console.log("Failed to post", res.msg);
     }
@@ -63,7 +76,9 @@ const FormEditPost = ({ location, post, panTo, labels }) => {
     console.group("handleSubmit");
 
     // currentLabel.value = currentLabel.value.toLowerCase();
-    const exists = labels.find(label => label.value === currentLabel.value);
+    const exists = labels
+      ? labels.find((label) => label.value === currentLabel.value)
+      : false;
     // check if need to create new label
     if (!exists) {
       currentLabel.value = currentLabel.value.toLowerCase();
@@ -109,15 +124,14 @@ const FormEditPost = ({ location, post, panTo, labels }) => {
       console.log("successfully created post");
 
       console.log(`label: ${oldLabelVal} vs. ${currentLabel.value}`);
-      if (oldLabelVal !== currentLabel.value){
+      if (oldLabelVal !== currentLabel.value) {
         await UserAPI.incrementLabel(oldLabelVal, -1);
         await UserAPI.incrementLabel(currentLabel.value, 1);
       } else {
         await UserAPI.incrementLabel(currentLabel.value, 1);
       }
 
-      document.location.href = "/map";
-      // panTo(location ? location : post.location);
+      navigate(0); // refresh current page
     } else {
       console.log("Failed to post", res.msg);
     }
@@ -161,7 +175,7 @@ const FormEditPost = ({ location, post, panTo, labels }) => {
           <Form.Control
             as="textarea"
             placeholder="Write your thoughts here"
-            style={{ height: "200px" }}
+            style={{ height: "300px" }}
             value={content}
             onChange={(e) => {
               setContent(e.target.value);
@@ -182,8 +196,9 @@ const FormEditPost = ({ location, post, panTo, labels }) => {
         <Form.Check
           type="checkbox"
           label="Set as private"
-          value={isPrivate}
-          onClick={handleCheckBox}
+          checked={isPrivate}
+          onChange={handleCheckBox}
+          // onClick={handleCheckBox}
         />
       </Form.Group>
 

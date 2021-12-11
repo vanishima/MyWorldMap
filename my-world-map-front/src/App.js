@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import MyPosts from "./pages/MyPosts";
-import MyMap from "./pages/Map";
+import MapPosts from "./pages/MapPosts";
 import User from "./pages/User";
-import Home from "./pages/Home";
+// import Home from "./pages/Home";
 import PostDetails from "./pages/PostDetails";
 
 import myAuth from "./authStatus";
@@ -25,11 +25,11 @@ function App() {
     <Router>
       <div className="App"></div>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<MapPosts />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/myposts" element={<MyPosts />} />
-        <Route path="/map" element={<MyMap />} />
+        <Route path="/mapposts" element={<MapPosts />} />
         <Route path="/user" element={<User />} />
         <Route path="/postdetails" element={<PostDetails />} />
       </Routes>

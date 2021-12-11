@@ -39,9 +39,10 @@ const MyPosts = () => {
   return (
     <Layout>
       <div className="container">
-        <h2>My Posts</h2>
+        <h1>Posts</h1>
 
         <PostsList posts={currentPosts} loading={loading} />
+        
         <Pagination
           postsPerPage={postsPerPage}
           totalPosts={posts.length}

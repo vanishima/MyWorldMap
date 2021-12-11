@@ -8,10 +8,17 @@ import {
   ComboboxInput,
   ComboboxPopover,
   ComboboxList,
-  ComboboxOption,
+  ComboboxOption
 } from "@reach/combobox";
 
-const Search = ({ panTo }) => {
+// Styles
+import "@reach/combobox/styles.css";
+
+import LocateTo from "./LocateTo";
+
+const Search = (props) => {
+  const { panTo, isLoaded } = props;
+
   const {
     ready,
     value,
@@ -25,8 +32,6 @@ const Search = ({ panTo }) => {
     },
   });
 
-  // https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompletionRequest
-
   const handleInput = (e) => {
     setValue(e.target.value);
   };
@@ -38,37 +43,45 @@ const Search = ({ panTo }) => {
     try {
       const results = await getGeocode({ address });
       const { lat, lng } = await getLatLng(results[0]);
+      console.log(`RESULT: ${lat}, ${lng}`);
       panTo({ lat, lng });
+      clearSuggestions();
     } catch (error) {
       console.log("😱 Error: ", error);
     }
   };
 
   return (
-    <div className="search">
-      <Combobox onSelect={handleSelect}>
-        <ComboboxInput
-          value={value}
-          onChange={handleInput}
-          disabled={!ready}
-          placeholder="Enter an address"
-          className="form-control"
-        />
-        <ComboboxPopover>
-          <ComboboxList>
-            {status === "OK" &&
-              data.map(({ id, description }) => (
-                <ComboboxOption key={id} value={description} />
-              ))}
-          </ComboboxList>
-        </ComboboxPopover>
-      </Combobox>
+    <div className="row">
+      {isLoaded && (
+        <Combobox className="search col-auto" onSelect={handleSelect}>
+          <ComboboxInput
+            value={value}
+            onChange={handleInput}
+            disabled={!ready}
+            placeholder="Enter an address"
+            className="form-control"
+          />
+          <ComboboxPopover>
+            <ComboboxList>
+              {status === "OK" &&
+                data.map(({ id, description }) => (
+                  <ComboboxOption key={id} value={description} />
+                ))}
+            </ComboboxList>
+          </ComboboxPopover>
+        </Combobox>
+      )}
+      <div className="col-1 left" style={{ padding: "30px 0" }}>
+        <LocateTo panTo={panTo} scale={1.5} color={"var(--darkRed)"}></LocateTo>
+      </div>
     </div>
   );
 };
 
 Search.propTypes = {
   panTo: PropTypes.func,
+  isLoaded: PropTypes.bool,
 };
 
 export default Search;

@@ -27,7 +27,7 @@ const options = {
   styles: mapStyles,
   disableDefaultUI: true,
   zoomControl: true,
-  // mapTypeControl: true,
+  mapTypeControl: true,
 };
 const center = {
   lat: 37.338207,
@@ -65,7 +65,7 @@ export default function Map() {
 
   const panTo = useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(16);
+    mapRef.current.setZoom(8);
   }, []);
 
   useEffect(() => {
@@ -89,99 +89,102 @@ export default function Map() {
     <Layout>
       <h1 className="overlay-bottom">Map with markers</h1>
 
-      {/*<PostFilterBox
+        {/*<PostFilterBox
         labels={labels}
         setLabelsSelected={setLabelsSelected}
         setPosts={setPosts}
       />*/}
 
-      <LabelButtons
-        labels={labels}
-        setLabelsSelected={setLabelsSelected}
-        setPosts={setPosts}
-        drawPosts={drawPosts}
-      />
-      <Locate panTo={panTo} />
-      <Search panTo={panTo} />
+        <LabelButtons
+          labels={labels}
+          setLabelsSelected={setLabelsSelected}
+          setPosts={setPosts}
+          drawPosts={drawPosts}
+        />
+        <Locate panTo={panTo} />
+        <Search panTo={panTo} />
 
-      <GoogleMap
-        id="map"
-        mapContainerStyle={mapContainerStyle}
-        zoom={8}
-        center={center}
-        options={options}
-        onClick={onMapClick}
-        onLoad={onMapLoad}
-      >
-        {markers.map((marker, i) => (
-          <Marker
-            key={`${marker.lat}-${marker.lng}`}
-            title={`${i}`}
-            // label={`${i}`}
-            animation={window.google.maps.Animation.DROP}
-            position={{ lat: marker.lat, lng: marker.lng }}
-            onClick={() => {
-              setSelected(marker);
-            }}
-            onMouseOver={(e) => {
-              setSelected(marker);
-              setPostSelected(null);
-              // setTimeout( () => {setSelected(null); }, 1000);
-            }}
-            icon={{
-              url: "/icons/panda.png",
-              origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(15, 15),
-              scaledSize: new window.google.maps.Size(35, 35),
-            }}
-          />
-        ))}
-
-        {posts &&
-          posts.map((post, i) => (
+        <GoogleMap
+          id="map"
+          mapContainerStyle={mapContainerStyle}
+          zoom={8}
+          center={center}
+          options={options}
+          onClick={onMapClick}
+          onLoad={onMapLoad}
+          aria-label="application"
+          role="application"
+          aria-hidden="true"
+        >
+          {markers.map((marker, i) => (
             <Marker
-              key={`${post.location.lat}-${post.location.lng}-${post.location.time}-${i}`}
+              key={`${marker.lat}-${marker.lng}`}
               title={`${i}`}
               // label={`${i}`}
               animation={window.google.maps.Animation.DROP}
-              position={{ lat: post.location.lat, lng: post.location.lng }}
+              position={{ lat: marker.lat, lng: marker.lng }}
               onClick={() => {
-                setPostSelected(post);
+                setSelected(marker);
               }}
               onMouseOver={(e) => {
-                setPostSelected(post);
-                setSelected(null);
-                // setTimeout( () => {setPostSelected(null); }, 1000);
+                setSelected(marker);
+                setPostSelected(null);
+                // setTimeout( () => {setSelected(null); }, 1000);
               }}
-              onMoustOut={{}}
               icon={{
-                url: "/icons/dinosaur-1.png",
+                url: "/icons/panda.png",
                 origin: new window.google.maps.Point(0, 0),
                 anchor: new window.google.maps.Point(15, 15),
-                scaledSize: new window.google.maps.Size(40, 40),
+                scaledSize: new window.google.maps.Size(35, 35),
               }}
             />
           ))}
 
-        {postSelected ? (
-          <PostWindow
-            post={postSelected}
-            setPostSelected={setPostSelected}
-            panTo={panTo}
-            labels={labels}
-            className="postWindow"
-          />
-        ) : null}
+          {posts &&
+            posts.map((post, i) => (
+              <Marker
+                key={`${post.location.lat}-${post.location.lng}-${post.location.time}-${i}`}
+                title={`${i}`}
+                // label={`${i}`}
+                animation={window.google.maps.Animation.DROP}
+                position={{ lat: post.location.lat, lng: post.location.lng }}
+                onClick={() => {
+                  setPostSelected(post);
+                }}
+                onMouseOver={(e) => {
+                  setPostSelected(post);
+                  setSelected(null);
+                  // setTimeout( () => {setPostSelected(null); }, 1000);
+                }}
+                onMoustOut={{}}
+                icon={{
+                  url: "/icons/dinosaur-1.png",
+                  origin: new window.google.maps.Point(0, 0),
+                  anchor: new window.google.maps.Point(15, 15),
+                  scaledSize: new window.google.maps.Size(40, 40),
+                }}
+              />
+            ))}
 
-        {selected ? (
-          <PostWindow
-            selected={selected}
-            setPostSelected={setPostSelected}
-            panTo={panTo}
-            labels={labels}
-          />
-        ) : null}
-      </GoogleMap>
+          {postSelected ? (
+            <PostWindow
+              post={postSelected}
+              setPostSelected={setPostSelected}
+              panTo={panTo}
+              labels={labels}
+              className="postWindow"
+            />
+          ) : null}
+
+          {selected ? (
+            <PostWindow
+              selected={selected}
+              setPostSelected={setPostSelected}
+              panTo={panTo}
+              labels={labels}
+            />
+          ) : null}
+        </GoogleMap>        
     </Layout>
   );
 }
