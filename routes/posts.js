@@ -32,6 +32,17 @@ router.get("/public", async (req, res) => {
   }
 });
 
+/* GET public label counts */
+router.get("/public/labels", async (req, res) => {
+  try {
+    const labels = await Post.getPublicLabelCounts();
+    console.log("GET posts/getPublicLabelCounts:", labels);
+    res.status(200).json({ labels: labels });
+  } catch (e) {
+    res.status(400).json({ msg: e.message });
+  }
+});
+
 /* GET posts by one user*/
 router.get("/", auth, async (req, res) => {
   console.log(">>>>> GET /posts");

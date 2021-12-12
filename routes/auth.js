@@ -158,8 +158,21 @@ router.get("/labelCounts", auth, async (req, res) => {
   console.log("user.id", user_id);
   try {
     const labelCounts = await User.getLabelCounts(user_id);
-    console.groupEnd("labelCounts",labelCounts);
+    console.groupEnd("labelCounts", labelCounts);
     res.status(200).send({ valid: true, labelCounts: labelCounts });
+  } catch (e) {
+    console.groupEnd(e.message);
+    res.status(400).send({ valid: false, msg: e.message });
+  }
+});
+
+/* GET public label counts */
+router.get("/getPublicLabels", async (req, res) => {
+  console.group("===== Enter /auth/getPublicLabels");
+  try {
+    const labels = await User.getPublicLabelCounts();
+    console.groupEnd("labelCounts", labels);
+    res.status(200).send({ valid: true, labelCounts: labels });
   } catch (e) {
     console.groupEnd(e.message);
     res.status(400).send({ valid: false, msg: e.message });

@@ -28,6 +28,11 @@ function PostsAPI() {
     }
   };
 
+  Posts.getPublicLabelCounts = async () => {
+    console.group("PostsAPI Posts.getPublicLabelCounts");
+    return fetch(FRONTEND + "/posts/public/labels");
+  };
+
   Posts.getPostByID = async (postID) => {
     return fetch(FRONTEND + "/posts/" + postID, {
       method: "GET",

@@ -158,7 +158,7 @@ const Map = (props) => {
         {selected ? (
           <PostWindow
             selected={selected}
-            setPostSelected={setPostSelected}
+            setSelected={setSelected}
             panTo={panTo}
             labels={labels}
           />

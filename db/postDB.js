@@ -115,11 +115,59 @@ function PostDB() {
             date: post.date,
             content: post.content,
             label: post.label,
-            isPrivate: post.isPrivate
+            isPrivate: post.isPrivate,
           },
         }
       );
       console.log("Updated", res);
+
+      return res;
+    } finally {
+      console.log("Closing the connection");
+      client.close();
+    }
+  };
+
+  myDB.getPublicLabelCounts = async () => {
+    const client = new MongoClient(uri, { useUnifiedTopology: true });
+    console.log("Connecting to the db");
+
+    try {
+      await client.connect();
+      console.log("Connected!");
+
+      const postsCol = client.db(DB_NAME).collection(COL_NAME_POST);
+      console.log(COL_NAME_POST, "Collection ready, getPublicLabelCounts");
+
+      const res = await postsCol.aggregate([
+        {
+          $match: {
+            isPrivate: false,
+            label: { $type: "object"}
+          },
+        },
+        {
+          $project: {
+            label: 1,
+          },
+        },
+        {
+          $group: {
+            _id: "$label.value",
+            count: {
+              $sum: 1,
+            },
+            label: {
+              $first: "$label.label",
+            },
+            value: {
+              $first: "$label.value",
+            },
+          },
+        },
+      ]).toArray();
+
+      console.log("getPublicLabelCounts", res);
 
       return res;
     } finally {

@@ -7,7 +7,7 @@ import { formatRelative } from "date-fns";
 import FormEditPost from "../FormEditPost";
 import myAuth from "../../authStatus";
 
-const PostWindow = ({ selected, post, setPostSelected, panTo, labels }) => {
+const PostWindow = ({ selected, post, setPostSelected, setSelected, panTo, labels }) => {
   const [editShow, setEditShow] = useState(false);
   const writeBtnRef = useRef(null);
   const [authWarnShow, setAuthWarnShow] = useState(false);
@@ -35,8 +35,9 @@ const PostWindow = ({ selected, post, setPostSelected, panTo, labels }) => {
           lng: lng,
         }}
         onCloseClick={() => {
-          console.log("InfoWindow close click");
-          setPostSelected(null);
+          if (setSelected) setSelected(null);
+          if (setPostSelected) setPostSelected(null);
+          setAuthWarnShow(false)
         }}
       >
         <div>
@@ -44,11 +45,11 @@ const PostWindow = ({ selected, post, setPostSelected, panTo, labels }) => {
           <p>Created {formatRelative(date, new Date())}</p>
           <Button
             ref={writeBtnRef}
-            variant="primary"
+            variant="outline-primary"
             onClick={handleEditShow}
             className="px-2"
           >
-            Edit
+            {post ? "Edit" : "Create new post"}
           </Button>
 
           <Overlay
@@ -93,6 +94,7 @@ const PostWindow = ({ selected, post, setPostSelected, panTo, labels }) => {
 PostWindow.propTypes = {
   selected: PropTypes.object,
   post: PropTypes.object,
+  setSelected: PropTypes.func,
   setPostSelected: PropTypes.func,
   panTo: PropTypes.func,
   label: PropTypes.array,
