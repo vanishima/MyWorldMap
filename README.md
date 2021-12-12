@@ -38,3 +38,10 @@ https://youtu.be/VEIjh7Rc74I
 ## Slides
 
 [MyWorldMap - Demo Slides](https://docs.google.com/presentation/d/1-geLwJzYKJlspD50PFWPP8-ywgT82o4Yulhyj5pynX8/edit?usp=sharing)
+
+# Code Review from Zhenghao Lin
+Hello, Shushu!
+Nice application! I like your idea of applying Google Map and embeding it in the website.
+I need to report a small defect that when switching from differnt tags causes tags duplicated.
+Your code looks well-documented. If I must give a suggestion, I suggest you make a shared base module for postDB.js and userDB.js.
+For example if I click the tag button "All", then click "Eat", then click "All", in this case "Eat" tag will be duplicated on the screen.
