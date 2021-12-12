@@ -8,42 +8,90 @@ import TextPreview from "../components/utils/TextPreview";
 import LocateTo from "../components/map/LocateTo";
 
 const PostsGrid = ({ posts, panTo }) => {
-
   return (
     <ul className="list-group mb-4">
       {posts.map((post) => (
-        <li key={post._id} className="list-group-item mb-2">
+        // <li key={post._id} className="list-group-item">
+        <div className="card-group mb-2">
           <Link
             to={{
               pathname: "/postDetails",
               search: "postID=" + post._id,
             }}
-            className="none-style"
+            className="none-style col-9"
             target="_blank"
           >
-            <h2 style={{ fontSize: "15px" }}>{post.title ? post.title : "(no title)"}</h2>
+            <div className="card">
+              <div className="card-body">
+                <h2 className="card-title" style={{ fontSize: "15px" }}>
+                  {post.title ? post.title : "(no title)"}
+                </h2>
+                <div
+                  className="card-text text-muted"
+                  style={{ fontSize: "10px" }}
+                >
+                  Posted {formatRelative(new Date(post.date), new Date())}
+                </div>
+                <TextPreview
+                  className="card-text"
+                  rawText={post.content}
+                  fontSize={"12px"}
+                  maxText={47}
+                />
+              </div>
+            </div>
           </Link>
-
-          <div className="text-muted" style={{ fontSize: "10px" }}>
-            Posted {formatRelative(new Date(post.date), new Date())}
+          <div className="card center">
+            <LocateTo
+              panTo={panTo}
+              location={post.location}
+              scale={1.5}
+              text={"Click to Locate"}
+              text_poistion={"bottom"}
+            />
           </div>
-          <div className="row">
-            <div className="col-10">
-              <TextPreview
-                rawText={post.content}
-                fontSize={"12px"}
-                maxText={47}
-              />
-            </div>
-            <div className="col-2 right">
-              <LocateTo panTo={panTo} location={post.location} />
-            </div>
-          </div>
-        </li>
+        </div>
       ))}
     </ul>
   );
 };
+// <div className="row">
+//           <Link
+//             to={{
+//               pathname: "/postDetails",
+//               search: "postID=" + post._id,
+//             }}
+//             className="none-style col-9"
+//             target="_blank"
+//           >
+//             <li key={post._id} className="list-group-item mb-2">
+//               <h2 style={{ fontSize: "15px" }}>
+//                 {post.title ? post.title : "(no title)"}
+//               </h2>
+
+//               <div className="text-muted" style={{ fontSize: "10px" }}>
+//                 Posted {formatRelative(new Date(post.date), new Date())}
+//               </div>
+//               <div className="row">
+//                 <div className="col-10">
+//                   <TextPreview
+//                     rawText={post.content}
+//                     fontSize={"12px"}
+//                     maxText={47}
+//                   />
+//                 </div>
+//               </div>
+//             </li>
+//           </Link>
+//           <div className="col-3 right">
+//             <LocateTo
+//               panTo={panTo}
+//               location={post.location}
+//               scale={1.5}
+//               text={"Click to locate"}
+//             />
+//           </div>
+//         </div>
 
 PostsGrid.propTypes = {
   props: PropTypes.shape({

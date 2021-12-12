@@ -14,22 +14,22 @@ const PostsList = ({ posts, loading }) => {
   return (
     <ul className="list-group mb-4">
       {posts.map((post) => (
-        <li key={post._id} className="list-group-item mb-2">
-          <Link
-            to={{
-              pathname: "/postDetails",
-              search: "postID=" + post._id,
-            }}
-            className="none-style"
-          >
+        <Link
+          to={{
+            pathname: "/postDetails",
+            search: "postID=" + post._id,
+          }}
+          className="none-style"
+        >
+          <li key={post._id} className="list-group-item mb-2">
             <h2>{post.title}</h2>
-          </Link>
 
-          <small className="text-muted">
-            Posted {formatRelative(new Date(post.date), new Date())}
-          </small>
-          <TextPreview rawText={post.content} />
-        </li>
+            <small className="text-muted">
+              Posted {formatRelative(new Date(post.date), new Date())}
+            </small>
+            <TextPreview rawText={post.content} />
+          </li>
+        </Link>
       ))}
     </ul>
   );

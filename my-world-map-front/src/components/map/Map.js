@@ -1,15 +1,14 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
-
 import { GoogleMap, Marker } from "@react-google-maps/api";
-import mapStyles from "../../mapStyles";
+// import mapStyles from "../../mapStyles";
 import PostWindow from "./PostWindow";
 
 // Constants
 // const libraries = ["places"];
 
 const options = {
-  styles: mapStyles,
+  // styles: mapStyles,
   disableDefaultUI: true,
   zoomControl: true,
   // mapTypeControl: true,
@@ -108,7 +107,7 @@ const Map = (props) => {
         {markers.map((marker, i) => (
           <Marker
             key={`${marker.lat}-${marker.lng}`}
-            title={`${i}`}
+            title={`temporary marker`}
             animation={window.google.maps.Animation.DROP}
             position={{ lat: marker.lat, lng: marker.lng }}
             onClick={() => {
@@ -127,7 +126,7 @@ const Map = (props) => {
           posts.map((post, i) => (
             <Marker
               key={`${post.location.lat}-${post.location.lng}-${post.location.time}-${i}`}
-              title={`${i}`}
+              title={`${post.title}`}
               animation={window.google.maps.Animation.DROP}
               position={{
                 lat: post.location.lat,

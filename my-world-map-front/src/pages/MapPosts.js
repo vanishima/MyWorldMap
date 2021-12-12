@@ -43,7 +43,7 @@ export default function MapPosts() {
 
   const panTo = useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(8);
+    mapRef.current.setZoom(14);
   }, []);
 
   useEffect(() => {
@@ -75,7 +75,7 @@ export default function MapPosts() {
 
         <div className="row">
           <div className="col-5">
-            {loadingPosts ? (
+            {loadingPosts && posts ? (
               <LoadingSpinner />
             ) : (
               <div>
@@ -101,11 +101,12 @@ export default function MapPosts() {
             )}
           </div>
           <div className="col-7">
+            <div className="center">Try to click anywhere on the map</div>
             {loadingPosts && <LoadingSpinner />}
             <div>
               <Map
                 width={55}
-                height={50}
+                height={70}
                 posts={posts}
                 labels={labels}
                 mapRef={mapRef}

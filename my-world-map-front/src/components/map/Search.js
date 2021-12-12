@@ -14,8 +14,6 @@ import {
 // Styles
 import "@reach/combobox/styles.css";
 
-import LocateTo from "./LocateTo";
-
 const Search = (props) => {
   const { panTo, isLoaded } = props;
 
@@ -52,9 +50,9 @@ const Search = (props) => {
   };
 
   return (
-    <div className="row">
+    <div>
       {isLoaded && (
-        <Combobox className="search col-auto" onSelect={handleSelect}>
+        <Combobox className="search" onSelect={handleSelect}>
           <ComboboxInput
             value={value}
             onChange={handleInput}
@@ -72,9 +70,6 @@ const Search = (props) => {
           </ComboboxPopover>
         </Combobox>
       )}
-      <div className="col-1 left" style={{ padding: "30px 0" }}>
-        <LocateTo panTo={panTo} scale={1.5} color={"var(--darkRed)"}></LocateTo>
-      </div>
     </div>
   );
 };

@@ -6,7 +6,6 @@ import Layout from "../components/Layout";
 import fetchLabelCounts from "../components/utils/fetchLabelCounts";
 
 const Home = () => {
-  // const [labels, setLabels] = useState(null);
   const [labelCounts, setLabelCounts] = useState(null);
 
   useEffect(() => {

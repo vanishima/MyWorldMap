@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import Search from "./Search";
+import LocateTo from "./LocateTo";
 
 const DEFAULT_FILTER_TAG = { value: "all", label: "All" };
 
@@ -40,22 +41,7 @@ const MapNavBar = (props) => {
         display: "flex",
       }}
     >
-      <div className="col-7">
-        {/*<button
-        className="me-2 mb-2 btn col-auto label-button-filter"
-        onClick={() => handleLabelClick(DEFAULT_FILTER_TAG)}
-      >
-        Latest
-      </button>
-      <button
-        className="me-2 mb-2 btn col-auto label-button-filter"
-        onClick={() => handleLabelClick(DEFAULT_FILTER_TAG)}
-      >
-        Closest
-      </button>*/}
-
-        {/*<div className="buttonDivider"></div>*/}
-
+      <div className="col-6">
         <button
           className="me-2 btn col-auto label-button"
           onClick={() => handleLabelClick(DEFAULT_FILTER_TAG)}
@@ -86,6 +72,16 @@ const MapNavBar = (props) => {
           panTo={props.panTo}
           mapRef={props.mapRef}
         />
+      </div>
+
+      <div className="col-1 card center" style={{border:"0"}}>
+        <LocateTo
+          panTo={props.panTo}
+          scale={2}
+          color={"var(--darkRed)"}
+          text={"Locate Me"}
+          text_position={"right"}
+        ></LocateTo>
       </div>
 
       {/*<button
