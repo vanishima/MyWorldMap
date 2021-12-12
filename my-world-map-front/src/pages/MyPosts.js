@@ -44,9 +44,10 @@ const MyPosts = () => {
         <PostsList posts={currentPosts} loading={loading} />
         
         <Pagination
-          postsPerPage={postsPerPage}
-          totalPosts={posts.length}
+          pageSize={postsPerPage}
+          totalCount={posts.length}
           paginate={paginate}
+          currentPage={currentPage}
         />
       </div>
     </Layout>

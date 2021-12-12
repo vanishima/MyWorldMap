@@ -34,7 +34,8 @@ export default function MapPosts() {
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts ?posts.slice(indexOfFirstPost, indexOfLastPost) : [];
+  const currentPosts = posts ? posts.slice(indexOfFirstPost, indexOfLastPost) : [];
+  // const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -93,9 +94,10 @@ export default function MapPosts() {
                 />
 
                 <Pagination
-                  postsPerPage={postsPerPage}
-                  totalPosts={posts.length}
+                  pageSize={postsPerPage}
+                  totalCount={posts.length}
                   paginate={paginate}
+                  currentPage={currentPage}
                 />
               </div>
             )}
