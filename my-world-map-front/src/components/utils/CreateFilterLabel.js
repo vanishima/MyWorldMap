@@ -37,7 +37,6 @@ const CreateFilterLabel = (props) => {
   const handleChange = (newValue, actionMeta) => {
     console.group("Value Changed");
     console.log(newValue);
-    // console.log(newValue.value.toLowerCase());
     console.log(`action: ${actionMeta.action}`);
     console.groupEnd();
     props.setCurrentLabel(newValue);

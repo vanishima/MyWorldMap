@@ -82,7 +82,6 @@ const FormEditPost = ({ location, post, panTo, labels }) => {
       : false;
     // check if need to create new label
     if (!exists) {
-      currentLabel.value = currentLabel.value.toLowerCase();
       const addLabelResRaw = await UserAPI.addLabel(currentLabel);
       console.log("addLabelResRaw:", addLabelResRaw);
       const addLabelRes = await addLabelResRaw.json();
