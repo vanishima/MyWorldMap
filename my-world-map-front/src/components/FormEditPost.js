@@ -124,12 +124,12 @@ const FormEditPost = ({ location, post, panTo, labels }) => {
       console.log("successfully created post");
 
       console.log(`label: ${oldLabelVal} vs. ${currentLabel.value}`);
-      if (oldLabelVal !== currentLabel.value) {
-        await UserAPI.incrementLabel(oldLabelVal, -1);
-        await UserAPI.incrementLabel(currentLabel.value, 1);
-      } else {
-        await UserAPI.incrementLabel(currentLabel.value, 1);
-      }
+      // if (oldLabelVal !== currentLabel.value) {
+      //   await UserAPI.incrementLabel(oldLabelVal, -1);
+      //   await UserAPI.incrementLabel(currentLabel.value, 1);
+      // } else {
+      //   await UserAPI.incrementLabel(currentLabel.value, 1);
+      // }
 
       navigate(0); // refresh current page
     } else {
