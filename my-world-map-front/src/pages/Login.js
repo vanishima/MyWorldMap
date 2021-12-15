@@ -43,22 +43,6 @@ const Login = () => {
     <Layout>
       <div className="container">
         <div className="row">
-          <div
-            className="col-auto"
-            style={{
-              "margin-top": "5rem",
-              padding: "10px",
-              height: "fit-content",
-              "background-color": "#2F4F4F",
-              color: "white",
-            }}
-          >
-            <h4>Test user</h4>
-            <p>
-              email: aaa@gmail.com <br />
-              password: 123
-            </p>
-          </div>
           <form
             className="registerLoginDiv center col-4"
             onSubmit={handleSubmit}
@@ -77,6 +61,7 @@ const Login = () => {
                   required
                 />
               </label>
+              <div class="italic">Test user: aaa@gmail.com</div>
             </div>
 
             <div className="form-group form-control">
@@ -91,6 +76,7 @@ const Login = () => {
                   required
                 />
               </label>
+              <div class="italic">Test user: 123</div>
             </div>
 
             <div>
@@ -105,9 +91,5 @@ const Login = () => {
     </Layout>
   );
 };
-
-// Login.propTypes = {
-//   setToken: PropTypes.func.isRequired,
-// };
 
 export default Login;

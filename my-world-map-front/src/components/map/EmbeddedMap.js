@@ -15,7 +15,7 @@ const options = {
   styles: mapStyles,
   disableDefaultUI: true,
   zoomControl: true,
-  mapTypeControl: true,
+  // mapTypeControl: true,
 };
 function Deleter() {
   // Ugly hack to make google maps pass the axe audit

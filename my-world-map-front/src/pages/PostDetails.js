@@ -70,7 +70,7 @@ const PostDetails = () => {
   console.log("rendering");
   return (
     <Layout>
-      <div className="container post-detail center mt-3 ">
+      <div className="container post-detail center mt-3">
         <div className="row">
           <h1 className="mb-2 col-auto">{post.title}</h1>
           {belongsToUser && (
@@ -116,22 +116,21 @@ const PostDetails = () => {
             </Tooltip>
           )}
         </Overlay>
-
-        <Offcanvas
-          show={editShow}
-          onHide={handleClose}
-          scroll={false}
-          backdrop={false}
-          placement={"end"}
-        >
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title>Edit Post</Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            <FormEditPost post={post} labels={labels} />
-          </Offcanvas.Body>
-        </Offcanvas>
       </div>
+      <Offcanvas
+        show={editShow}
+        onHide={handleClose}
+        scroll={false}
+        backdrop={false}
+        placement={"end"}
+      >
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Edit Post</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <FormEditPost post={post} labels={labels} />
+        </Offcanvas.Body>
+      </Offcanvas>
     </Layout>
   );
 };

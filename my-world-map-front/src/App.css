@@ -16,6 +16,10 @@ h2 {
   font-size: 20px;
 }
 
+.italic {
+  font-style: italic;
+}
+
 .none-list {
   list-style: none;
 }
@@ -109,18 +113,17 @@ h2 {
 }
 
 .locateTo {
-  background: none;
+  background: #fff;
   border: none;
   z-index: 11;
 }
 
 .locateTo:hover {
-  color: #a03d50;
+  color: var(--brown);
 }
 
-.locate img {
-  width: 30px;
-  cursor: pointer;
+.locateTo small {
+  color: #000;
 }
 
 .post-filter {
@@ -206,6 +209,7 @@ h2 {
 .post-detail {
   margin-right: auto;
   margin-left: auto;
+  width: 700px;
 }
 
 .page-link {
