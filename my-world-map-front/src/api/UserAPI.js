@@ -65,7 +65,10 @@ function UserAPI() {
       });
       // get public labels
     } else {
-      return fetch(FRONTEND + "/posts/public/labels");
+      return fetch(FRONTEND + "/posts/public/labels", {
+        method: "GET",
+        mode: "cors",
+      });
     }
   };
 

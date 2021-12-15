@@ -42,7 +42,7 @@ const Register = () => {
   return (
     <Layout className="registration">
       <form className="registerLoginDiv center" onSubmit={handleSubmit}>
-        <h2>Create Account</h2>
+        <h1>Create Account</h1>
         <div className="form-group form-control">
           <label>
             Email:

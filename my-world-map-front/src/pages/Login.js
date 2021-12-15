@@ -63,7 +63,7 @@ const Login = () => {
             className="registerLoginDiv center col-4"
             onSubmit={handleSubmit}
           >
-            <h2>Sign in</h2>
+            <h1>Sign in</h1>
             {message}
             <div className="form-group form-control">
               <label>
