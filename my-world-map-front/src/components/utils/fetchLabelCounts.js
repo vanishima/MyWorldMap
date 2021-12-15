@@ -6,7 +6,7 @@ async function getLabelCounts(setLabels) {
   console.log("getLabelCounts", resRaw);
   if (resRaw.ok) {
     const res = await resRaw.json();
-    const labelCounts = await res.labelCounts;
+    const labelCounts = await res.labels;
     setLabels(labelCounts);
   }
 }
