@@ -130,7 +130,7 @@ function PostDB() {
 
   myDB.getPublicLabelCounts = async () => {
     const client = new MongoClient(uri, { useUnifiedTopology: true });
-    console.group("Post.getPublicLabelCounts");
+    console.log("Post.getPublicLabelCounts");
     console.log("Connecting to the db");
 
     try {
@@ -171,11 +171,11 @@ function PostDB() {
         ])
         .toArray();
 
-      console.groupEnd("getPublicLabelCounts", res);
+      console.log("getPublicLabelCounts", res);
 
       return res;
     } finally {
-      console.groupEnd("Closing the connection");
+      console.log("Closing the connection");
       client.close();
     }
   };
