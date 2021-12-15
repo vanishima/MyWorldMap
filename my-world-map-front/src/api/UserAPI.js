@@ -40,17 +40,17 @@ function UserAPI() {
     });
   };
 
-  User.incrementLabel = async (label, num) => {
-    return fetch(FRONTEND + "/auth/incrLabel", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": localStorage.getItem("token"),
-      },
-      mode: "cors",
-      body: JSON.stringify({ label: label, num: num }),
-    });
-  }
+  // User.incrementLabel = async (label, num) => {
+  //   return fetch(FRONTEND + "/auth/incrLabel", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "x-auth-token": localStorage.getItem("token"),
+  //     },
+  //     mode: "cors",
+  //     body: JSON.stringify({ label: label, num: num }),
+  //   });
+  // }
 
   User.getLabelCounts = async ()=> {
     console.log("UserAPI.getLabelCounts");
@@ -65,10 +65,7 @@ function UserAPI() {
       });
     // get public labels
     } else {
-      return fetch(FRONTEND + "/auth/getPublicLabels", {
-        method: "GET",
-        mode: "cors",
-      });
+      return fetch(FRONTEND + "/posts/public/labels");
     }
     
   }
