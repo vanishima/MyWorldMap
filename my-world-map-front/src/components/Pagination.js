@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { usePagination, DOTS } from "./usePagination";
 import "../stylesheets/pagination.css";
 
+// https://github.com/mayankshubham/react-pagination
+
 const Pagination = ({
   pageSize,
   totalCount,
@@ -38,7 +40,9 @@ const Pagination = ({
     paginate(currentPage - 1);
   };
 
-  let lastPage = paginationRange[paginationRange.length - 1];
+  const lastPage = paginationRange[paginationRange.length - 1];
+  console.log("LAST PAGE:", lastPage);
+  console.log("CURRENT PAGE:", currentPage);
 
   return (
     <ul className="pagination-container">
@@ -56,7 +60,11 @@ const Pagination = ({
       {paginationRange.map((pageNumber, i) => {
         // if the pageItem is a DOT, render the DOTS unicode character
         if (pageNumber === DOTS) {
-          return <li className="pagination-item dots" key={i}>&#8230;</li>;
+          return (
+            <li className="pagination-item dots" key={i}>
+              &#8230;
+            </li>
+          );
         }
 
         // Render our Page Pills
@@ -84,28 +92,17 @@ const Pagination = ({
       })}
 
       {/* right navigation arrow*/}
-      <li
-        className={`pagination-item ${
-          currentPage === lastPage ? "disabled" : ""
-        }`}
-        onClick={onNext}
-      >
-        <div className="arrow right"></div>
-      </li>
+      {currentPage === lastPage ? (
+        <li className="pagination-item">
+          <div className="arrow right disabled"></div>
+        </li>
+      ) : (
+        <li className="pagination-item" onClick={onNext}>
+          <div className="arrow right"></div>
+        </li>
+      )}
     </ul>
   );
-
-  // return (
-  //   <ul className="pagination left none-list">
-  //     {pageNumbers.map((number) => (
-  //       <li key={number} className="page-item">
-  //         <div onClick={() => paginate(number)} className="page-link">
-  //           {number}
-  //         </div>
-  //       </li>
-  //     ))}
-  //   </ul>
-  // );
 };
 
 Pagination.propTypes = {

@@ -54,13 +54,23 @@ function UserAPI() {
 
   User.getLabelCounts = async ()=> {
     console.log("UserAPI.getLabelCounts");
-    return fetch(FRONTEND + "/auth/labelCounts", {
-      method: "GET",
-      headers: {
-        "x-auth-token": localStorage.getItem("token"),
-      },
-      mode: "cors",
-    });
+    // if logged in, get lable counts belonged to user
+    if (localStorage.getItem("token")){
+      return fetch(FRONTEND + "/auth/labelCounts", {
+        method: "GET",
+        headers: {
+          "x-auth-token": localStorage.getItem("token"),
+        },
+        mode: "cors",
+      });
+    // get public labels
+    } else {
+      return fetch(FRONTEND + "/auth/getPublicLabels", {
+        method: "GET",
+        mode: "cors",
+      });
+    }
+    
   }
 
   return User;

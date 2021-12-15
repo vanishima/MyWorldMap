@@ -25,7 +25,7 @@ router.get("/public", async (req, res) => {
     const posts = await Post.getPosts({
       $and: [{ $or: [{ isPublic: true }, { isPrivate: false }] }, {}],
     });
-    console.log("GET posts/public:", posts);
+    // console.log("GET posts/public:", posts);
     res.status(200).json({ posts: posts });
   } catch (e) {
     res.status(400).json({ msg: e.message });
@@ -55,7 +55,7 @@ router.get("/", auth, async (req, res) => {
         { "author.id": ObjectId(authorId) },
       ],
     });
-    console.log("Got posts", posts);
+    // console.log("Got posts", posts);
     res.status(200).json({ posts: posts });
   } catch (e) {
     res.status(400).json({ msg: e.message });
@@ -70,6 +70,23 @@ router.get("/label/:label", auth, async (req, res) => {
   console.log("GET /label", label);
   console.log(label);
   try {
+    // const posts = await Post.getPosts({
+    //   $and: [
+    //     { $or: [{ label: label }, { "label.value": label }] },
+    //     {
+    //       $or: [
+    //         {
+    //           $or: [
+    //             { authorId: ObjectId(authorId) },
+    //             { "author.id": ObjectId(authorId) },
+    //           ],
+    //         },
+    //         { isPrivate: false },
+    //       ],
+    //     },
+    //   ],
+    // });
+
     const posts = await Post.getPosts({
       $and: [
         { $or: [{ label: label }, { "label.value": label }] },

@@ -10,22 +10,13 @@ import FormEditPost from "../components/FormEditPost";
 
 // API
 import PostsAPI from "../api/PostsAPI";
-import fetchLabels from "../components/utils/fetchLabels";
+// import fetchLabels from "../components/utils/fetchLabels";
+import fetchLabelCounts from "../components/utils/fetchLabelCounts";
 import myAuth from "../authStatus";
+import { fetchPost } from "../components/utilFunctions";
 
 // Styles
 import "../stylesheets/myPosts.css";
-
-async function drawPost(setPost) {
-  const url = new URL(window.location);
-  const postID = url.searchParams.get("postID");
-  console.log("PostDetails:", postID);
-  const resRaw = await PostsAPI.getPostByID(postID);
-  const res = await resRaw.json();
-  const post = res.posts[0];
-  post.contentStr = post.content.replace(/\n/g, "<br>");
-  await setPost(post);
-}
 
 const PostDetails = () => {
   const editBtnRef = useRef(null);
@@ -33,6 +24,7 @@ const PostDetails = () => {
   const [authWarnShow, setAuthWarnShow] = useState(false);
   const [labels, setLabels] = useState(null);
   const [post, setPost] = useState({});
+  const [belongsToUser, setBelongsToUser] = useState(false);
 
   const navigate = useNavigate();
 
@@ -71,8 +63,8 @@ const PostDetails = () => {
 
   useEffect(() => {
     console.log("### EFFECT ###");
-    drawPost(setPost);
-    fetchLabels(setLabels);
+    fetchPost(setPost, setBelongsToUser);
+    fetchLabelCounts(setLabels);
   }, []);
 
   console.log("rendering");
@@ -81,17 +73,24 @@ const PostDetails = () => {
       <div className="container post-detail center mt-3 ">
         <div className="row">
           <h1 className="mb-2 col-auto">{post.title}</h1>
-          <button
-            ref={editBtnRef}
-            onClick={handleEditShow}
-            className="btn btn-outline-primary col-auto me-2"
-          >
-            Edit
-          </button>
+          {belongsToUser && (
+            <div>
+              <button
+                ref={editBtnRef}
+                onClick={handleEditShow}
+                className="btn btn-outline-primary col-auto me-2"
+              >
+                Edit
+              </button>
 
-          <button className="btn btn-outline-danger col-auto" onClick={handleDelete}>
-            Delete
-          </button>
+              <button
+                className="btn btn-outline-danger col-auto"
+                onClick={handleDelete}
+              >
+                Delete
+              </button>
+            </div>
+          )}
         </div>
         <small className="mb-3 text-muted">
           Posted{" "}

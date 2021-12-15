@@ -1,3 +1,5 @@
+// https://github.com/mayankshubham/react-pagination
+
 import {useMemo} from "react";
 
 const range = (start, end) => {

@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const User = require("../db/userDB.js");
+const Post = require("../db/PostDB.js");
 
 const auth = require("../middleware/auth");
 
@@ -170,7 +171,7 @@ router.get("/labelCounts", auth, async (req, res) => {
 router.get("/getPublicLabels", async (req, res) => {
   console.group("===== Enter /auth/getPublicLabels");
   try {
-    const labels = await User.getPublicLabelCounts();
+    const labels = await Post.getPublicLabelCounts();
     console.groupEnd("labelCounts", labels);
     res.status(200).send({ valid: true, labelCounts: labels });
   } catch (e) {

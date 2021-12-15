@@ -65,6 +65,7 @@ const FormEditPost = ({ location, post, panTo, labels }) => {
 
     if (resRaw.ok) {
       console.log("successfully deleted post");
+      alert("Deletion successful!");
       navigate(0);
     } else {
       console.log("Failed to post", res.msg);

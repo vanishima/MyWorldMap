@@ -17,7 +17,6 @@ const options = {
   zoomControl: true,
   mapTypeControl: true,
 };
-
 function Deleter() {
   // Ugly hack to make google maps pass the axe audit
   const delRef = useRef();
@@ -26,13 +25,18 @@ function Deleter() {
     try {
       console.log("PARENT", delRef.current.parentElement);
 
-      const bug = delRef.current.parentElement.querySelector(
-        "div[aria-roledescription]"
-      );
+      setTimeout(() => {
+        console.log("waiting for map to render");
+        const bug = delRef.current.parentElement.querySelector(
+          "div[aria-roledescription]"
+        );
 
-      // const bug = document.querySelector("div[aria-roledescription]");
-      console.log("deleting from ", bug);
-      bug.removeAttribute("aria-roledescription");
+        console.log("deleting from ", bug);
+
+        if (bug){
+          bug.removeAttribute("aria-roledescription");
+        }
+      }, 1000);
 
       console.groupEnd("removing aria-roledescription", delRef.current);
     } catch (err) {

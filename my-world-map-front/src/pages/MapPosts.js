@@ -12,7 +12,7 @@ import MapNavBar from "../components/map/MapNavBar";
 
 // API
 import drawPosts from "../components/utils/drawPosts";
-import fetchLabels from "../components/utils/fetchLabels";
+import fetchLabelCounts from "../components/utils/fetchLabelCounts";
 
 // Constants
 const libraries = ["places"];
@@ -49,7 +49,7 @@ export default function MapPosts() {
 
   useEffect(() => {
     console.log("### EFFECT ###");
-    fetchLabels(setLabels);
+    fetchLabelCounts(setLabels);
     drawPosts(setPosts, labelsSelected, setLoadingPosts);
   }, [labelsSelected]);
 
@@ -62,6 +62,7 @@ export default function MapPosts() {
         <div className="row">
           <MapNavBar
             labels={labels}
+            labelsSelected={labelsSelected}
             setLabelsSelected={setLabelsSelected}
             setPosts={setPosts}
             drawPosts={drawPosts}
@@ -108,7 +109,7 @@ export default function MapPosts() {
             <div>
               <Map
                 width={55}
-                height={70}
+                height={80}
                 posts={posts}
                 labels={labels}
                 mapRef={mapRef}

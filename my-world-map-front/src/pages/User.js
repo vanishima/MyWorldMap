@@ -9,9 +9,9 @@ const User = () => {
     fetchLabelCounts(setLabelCounts);
   }, []);
 
-  const handleLabelClick = (label) => {
-    console.log(`${label.label} clicked`);
-  };
+  // const handleLabelClick = (label) => {
+  //   console.log(`${label.label} clicked`);
+  // };
 
   return (
     <Layout>
@@ -21,19 +21,26 @@ const User = () => {
         <div>
           {labelCounts &&
             labelCounts.map((label, i) => (
-              <button
+              <div
                 key={i}
-                className="btn"
-                onClick={() => handleLabelClick(label)}
               >
                 <span style={{ fontSize: "18px" }}>{label.label}</span> (
                 {label.count ? label.count : "0"})
-              </button>
+              </div>
             ))}
         </div>
       </div>
     </Layout>
   );
 };
+
+// <button
+//   key={i}
+//   className="btn"
+//   onClick={() => handleLabelClick(label)}
+// >
+//   <span style={{ fontSize: "18px" }}>{label.label}</span> (
+//   {label.count ? label.count : "0"})
+// </button>
 
 export default User;

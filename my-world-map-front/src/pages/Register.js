@@ -34,6 +34,7 @@ const Register = () => {
       console.log("Got token:", res.token);
       localStorage.setItem("token", res.token);
       localStorage.setItem("user", JSON.stringify(res.user));
+      alert("Register successful. Welcome to My World Map!");
       document.location.href = "/";
     }
   };

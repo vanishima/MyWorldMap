@@ -9,10 +9,9 @@ import LocateTo from "../components/map/LocateTo";
 
 const PostsGrid = ({ posts, panTo }) => {
   return (
-    <ul className="list-group mb-4">
-      {posts.map((post) => (
-        // <li key={post._id} className="list-group-item">
-        <div className="card-group mb-2">
+    <div className="mb-4">
+      {posts.map((post, i) => (
+        <div className="card-group mb-2" key={i}>
           <Link
             to={{
               pathname: "/postDetails",
@@ -26,11 +25,11 @@ const PostsGrid = ({ posts, panTo }) => {
                 <h2 className="card-title" style={{ fontSize: "15px" }}>
                   {post.title ? post.title : "(no title)"}
                 </h2>
-                <div
-                  className="card-text text-muted"
-                  style={{ fontSize: "10px" }}
-                >
-                  Posted {formatRelative(new Date(post.date), new Date())}
+                <div className="card-text" style={{ fontSize: "10px" }}>
+                  <span className="text-muted">
+                    Posted {formatRelative(new Date(post.date), new Date())}
+                  </span>{" "}
+                  {post.label.label ? post.label.label : post.label}
                 </div>
                 <TextPreview
                   className="card-text"
@@ -52,7 +51,7 @@ const PostsGrid = ({ posts, panTo }) => {
           </div>
         </div>
       ))}
-    </ul>
+    </div>
   );
 };
 // <div className="row">

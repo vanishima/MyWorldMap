@@ -1,14 +1,14 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import { GoogleMap, Marker } from "@react-google-maps/api";
-// import mapStyles from "../../mapStyles";
+import mapStyles from "../../mapStyles";
 import PostWindow from "./PostWindow";
 
 // Constants
 // const libraries = ["places"];
 
 const options = {
-  // styles: mapStyles,
+  styles: mapStyles,
   disableDefaultUI: true,
   zoomControl: true,
   // mapTypeControl: true,
@@ -56,10 +56,19 @@ const Map = (props) => {
     width: (width ? width : "100") + "vw",
   };
 
-  // const { isLoaded, loadError } = useLoadScript({
-  //   googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-  //   libraries,
-  // });
+  // const [currentLocation, setCurrentLocation] = useState(null);
+
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition(
+  //     (position) => {
+  //       setCurrentLocation({
+  //         lat: position.coords.latitude,
+  //         lng: position.coords.longitude,
+  //       });
+  //     },
+  //     () => null
+  //   );
+  // }, [])
 
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
