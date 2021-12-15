@@ -42,7 +42,7 @@ const MyPosts = () => {
         <h1>Posts</h1>
 
         <PostsList posts={currentPosts} loading={loading} />
-        
+
         <Pagination
           pageSize={postsPerPage}
           totalCount={posts.length}

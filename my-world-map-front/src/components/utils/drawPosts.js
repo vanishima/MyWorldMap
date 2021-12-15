@@ -1,20 +1,14 @@
 import PostsAPI from "../../api/PostsAPI";
 
-async function drawPosts(
-  setPosts,
-  labelSelected,
-  setLoadingPosts
-) {
-
+async function drawPosts(setPosts, labelSelected, setLoadingPosts) {
   // console.group("drawPosts");
 
-  if (!setLoadingPosts){
+  if (!setLoadingPosts) {
     // console.log("no setLoadingPosts");
   } else {
     setLoadingPosts(true);
     // console.log("setLoadingPosts -> true");
   }
-  
 
   // console.log(labelSelected);
   const resRaw = await PostsAPI.getPosts(labelSelected);
@@ -24,10 +18,10 @@ async function drawPosts(
   // console.log(res);
 
   // console.log("[Map.js] drawPosts: res.posts", await res.posts);
-  
+
   setPosts(res.posts);
 
-  if (setLoadingPosts){
+  if (setLoadingPosts) {
     setLoadingPosts(false);
     // console.log("setLoadingPosts -> false");
   }

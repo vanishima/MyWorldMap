@@ -21,9 +21,7 @@ const User = () => {
         <div>
           {labelCounts &&
             labelCounts.map((label, i) => (
-              <div
-                key={i}
-              >
+              <div key={i}>
                 <span style={{ fontSize: "18px" }}>{label.label}</span> (
                 {label.count ? label.count : "0"})
               </div>

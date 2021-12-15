@@ -34,7 +34,7 @@ function Deleter() {
 
         console.log("deleting from ", bug);
 
-        if (bug){
+        if (bug) {
           bug.removeAttribute("aria-roledescription");
         }
       }, 1000);
@@ -48,8 +48,7 @@ function Deleter() {
 }
 
 const Map = (props) => {
-  const { height, width, posts, labels, mapRef, panTo } =
-    props;
+  const { height, width, posts, labels, mapRef, panTo } = props;
 
   const mapContainerStyle = {
     height: (height ? height : "100") + "vh",
@@ -91,9 +90,12 @@ const Map = (props) => {
   };
 
   // const mapRef = useRef();
-  const onMapLoad = useCallback((map) => {
-    mapRef.current = map;
-  }, [mapRef]);
+  const onMapLoad = useCallback(
+    (map) => {
+      mapRef.current = map;
+    },
+    [mapRef]
+  );
 
   // if (loadError) return "Error";
   // if (!isLoaded) return "loadingMap...";

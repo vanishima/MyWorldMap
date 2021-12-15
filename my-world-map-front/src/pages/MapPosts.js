@@ -34,7 +34,9 @@ export default function MapPosts() {
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts ? posts.slice(indexOfFirstPost, indexOfLastPost) : [];
+  const currentPosts = posts
+    ? posts.slice(indexOfFirstPost, indexOfLastPost)
+    : [];
   // const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   // Change page
@@ -89,10 +91,7 @@ export default function MapPosts() {
                   </span>
                 </h1>
 
-                <PostsGrid
-                  posts={currentPosts}
-                  panTo={panTo}
-                />
+                <PostsGrid posts={currentPosts} panTo={panTo} />
 
                 <Pagination
                   pageSize={postsPerPage}

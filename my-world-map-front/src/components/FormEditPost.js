@@ -36,9 +36,9 @@ const FormEditPost = ({ location, post, panTo, labels }) => {
     post.label = { value: post.label, label: post.label, color: "#00B8D9" };
   }
   let tempLabel;
-  if (post && post.label){
+  if (post && post.label) {
     tempLabel = post.label;
-  } else if (labels){
+  } else if (labels) {
     tempLabel = labels[0];
   } else {
     tempLabel = DEFAULT_LABEL;

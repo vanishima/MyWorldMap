@@ -64,7 +64,8 @@ const MapNavBar = (props) => {
           props.labels.map((label, i) => (
             <button
               className={`me-2 btn col-auto label-button ${
-                props.labelsSelected && label.value === props.labelsSelected.value
+                props.labelsSelected &&
+                label.value === props.labelsSelected.value
                   ? "label-selected"
                   : ""
               }`}

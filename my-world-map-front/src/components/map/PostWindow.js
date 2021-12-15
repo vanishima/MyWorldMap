@@ -7,7 +7,14 @@ import { formatRelative } from "date-fns";
 import FormEditPost from "../FormEditPost";
 import myAuth from "../../authStatus";
 
-const PostWindow = ({ selected, post, setPostSelected, setSelected, panTo, labels }) => {
+const PostWindow = ({
+  selected,
+  post,
+  setPostSelected,
+  setSelected,
+  panTo,
+  labels,
+}) => {
   const [editShow, setEditShow] = useState(false);
   const writeBtnRef = useRef(null);
   const [authWarnShow, setAuthWarnShow] = useState(false);
@@ -37,7 +44,7 @@ const PostWindow = ({ selected, post, setPostSelected, setSelected, panTo, label
         onCloseClick={() => {
           if (setSelected) setSelected(null);
           if (setPostSelected) setPostSelected(null);
-          setAuthWarnShow(false)
+          setAuthWarnShow(false);
         }}
       >
         <div>

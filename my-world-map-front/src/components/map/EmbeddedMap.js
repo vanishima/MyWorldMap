@@ -33,7 +33,7 @@ function Deleter() {
 
         console.log("deleting from ", bug);
 
-        if (bug){
+        if (bug) {
           bug.removeAttribute("aria-roledescription");
         }
       }, 1000);
@@ -69,27 +69,27 @@ const EmbeddedMap = (props) => {
 
   return (
     <GoogleMap
-        id="map"
-        mapContainerStyle={mapContainerStyle}
-        zoom={5}
-        center={center}
-        options={options}
-        onLoad={onMapLoad}
-      >
-        <Marker
-          title={"target"}
-          animation={window.google.maps.Animation.DROP}
-          position={center}
-          icon={{
-            url: "/icons/dinosaur-1.png",
-            origin: new window.google.maps.Point(0, 0),
-            anchor: new window.google.maps.Point(15, 15),
-            scaledSize: new window.google.maps.Size(35, 35),
-          }}
-        />
-        <Deleter></Deleter>
-      </GoogleMap>
+      id="map"
+      mapContainerStyle={mapContainerStyle}
+      zoom={5}
+      center={center}
+      options={options}
+      onLoad={onMapLoad}
+    >
+      <Marker
+        title={"target"}
+        animation={window.google.maps.Animation.DROP}
+        position={center}
+        icon={{
+          url: "/icons/dinosaur-1.png",
+          origin: new window.google.maps.Point(0, 0),
+          anchor: new window.google.maps.Point(15, 15),
+          scaledSize: new window.google.maps.Size(35, 35),
+        }}
+      />
+      <Deleter></Deleter>
+    </GoogleMap>
   );
-}
+};
 
 export default EmbeddedMap;

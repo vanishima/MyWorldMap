@@ -52,10 +52,10 @@ function UserAPI() {
   //   });
   // }
 
-  User.getLabelCounts = async ()=> {
+  User.getLabelCounts = async () => {
     console.log("UserAPI.getLabelCounts");
     // if logged in, get lable counts belonged to user
-    if (localStorage.getItem("token")){
+    if (localStorage.getItem("token")) {
       return fetch(FRONTEND + "/auth/labelCounts", {
         method: "GET",
         headers: {
@@ -63,12 +63,11 @@ function UserAPI() {
         },
         mode: "cors",
       });
-    // get public labels
+      // get public labels
     } else {
       return fetch(FRONTEND + "/posts/public/labels");
     }
-    
-  }
+  };
 
   return User;
 }

@@ -1,10 +1,10 @@
 /* Define theme colors */
-:root {  
-  --orange: #ff6f69;  
-  --pink: #D06DAB;
-  --brown: #663E3D;
-  --purple: #9173B4;
-  --darkRed: #A03D50;
+:root {
+  --orange: #ff6f69;
+  --pink: #d06dab;
+  --brown: #663e3d;
+  --purple: #9173b4;
+  --darkRed: #a03d50;
   --darkBlue: #193478;
 }
 
@@ -83,7 +83,7 @@ h2 {
 }
 
 .search {
-/*  position: absolute;
+  /*  position: absolute;
   top: 3rem;
   left: 1rem;
   /*transform: translateX(-50%);*/
@@ -115,7 +115,7 @@ h2 {
 }
 
 .locateTo:hover {
-  color: #A03D50;
+  color: #a03d50;
 }
 
 .locate img {
@@ -132,7 +132,7 @@ h2 {
 }
 
 .filter-buttons {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .label-button {
@@ -154,7 +154,7 @@ h2 {
 }
 
 .label-button:hover {
-  background-color: #D06DAB;
+  background-color: #d06dab;
   box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
   color: #fff;
   transform: translateY(-7px);
@@ -178,12 +178,11 @@ h2 {
 }
 
 .label-button-filter:hover {
-  background-color: #D06DAB;
+  background-color: #d06dab;
   box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
   color: #fff;
   transform: translateY(-7px);
 }
-
 
 .label-button div img {
   width: 15px;
@@ -191,7 +190,7 @@ h2 {
 
 .label-selected {
   background-color: var(--darkRed);
-  color: #FFF;
+  color: #fff;
 }
 
 .buttonDivider {
@@ -214,7 +213,7 @@ h2 {
 }
 
 .page-link:hover {
-  color: #FFF;
+  color: #fff;
   background-color: var(--darkRed);
 }
 

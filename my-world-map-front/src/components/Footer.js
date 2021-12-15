@@ -18,7 +18,8 @@ const Footer = () => {
           title="Kiranshastry"
         >
           Kiranshastry
-        </a>{", "}
+        </a>
+        {", "}
         <a
           className="none-style"
           href="https://www.flaticon.com/authors/dmitri13"

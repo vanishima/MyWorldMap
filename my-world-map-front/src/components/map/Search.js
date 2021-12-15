@@ -8,7 +8,7 @@ import {
   ComboboxInput,
   ComboboxPopover,
   ComboboxList,
-  ComboboxOption
+  ComboboxOption,
 } from "@reach/combobox";
 
 // Styles

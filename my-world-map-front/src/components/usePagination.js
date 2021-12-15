@@ -1,6 +1,6 @@
 // https://github.com/mayankshubham/react-pagination
 
-import {useMemo} from "react";
+import { useMemo } from "react";
 
 const range = (start, end) => {
   let length = end - start + 1;
@@ -11,13 +11,13 @@ const range = (start, end) => {
   return Array.from({ length }, (_, idx) => idx + start);
 };
 
-export const DOTS = '...';
+export const DOTS = "...";
 
 export const usePagination = ({
   totalCount,
   pageSize,
   siblingCount = 1,
-  currentPage
+  currentPage,
 }) => {
   const paginationRange = useMemo(() => {
     const totalPageCount = Math.ceil(totalCount / pageSize);
@@ -33,7 +33,7 @@ export const usePagination = ({
     if (totalPageNumbers >= totalPageCount) {
       return range(1, totalPageCount);
     }
-  
+
     /*
       Calculate left and right sibling index and make sure they are within range 1 and totalPageCount
     */
@@ -66,7 +66,6 @@ export const usePagination = ({
       Case 3: No right dots to show, but left dots to be shown
     */
     if (shouldShowLeftDots && !shouldShowRightDots) {
-      
       let rightItemCount = 3 + 2 * siblingCount;
       let rightRange = range(
         totalPageCount - rightItemCount + 1,
@@ -74,7 +73,7 @@ export const usePagination = ({
       );
       return [firstPageIndex, DOTS, ...rightRange];
     }
-     
+
     /*
       Case 4: Both left and right dots to be shown
     */
