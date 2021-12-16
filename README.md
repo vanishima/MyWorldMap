@@ -38,7 +38,7 @@ Instructor: [John Alexis Guerra Gómez](https://johnguerra.co/)
 
 ## Internal demo (long)
 
-- Report video: https://youtu.be/C-hbwiRFYf0 
+- Report video: https://youtu.be/C-hbwiRFYf0
 - Report slides: [MyWorldMap - Usability Study Slides](https://docs.google.com/presentation/d/1xU60W0d3TenMsiq4zl1wXwQ10V--EI-ohCsc4DftjVs/edit?usp=sharing)
 - Usability Study with user 1/3: https://youtu.be/cNqw4-kPTyk
 - Usability Study with user 2/3: https://youtu.be/hd1of4_Cv-c
