@@ -4,6 +4,9 @@ import { GoogleMap, Marker } from "@react-google-maps/api";
 import mapStyles from "../../mapStyles";
 import PostWindow from "./PostWindow";
 
+
+//Daniel - I really loved your use of google maps - specifically the styling of the application and I like that your able to detect my location automatically.
+// If you ever have time, I would love for you to show me how you did this!!! :)
 // Constants
 // const libraries = ["places"];
 
