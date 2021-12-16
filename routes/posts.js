@@ -19,6 +19,10 @@ router.post("/create", auth, async (req, res) => {
   }
 });
 
+
+//Daniel - I like that you have public post and that you used pagination and I like how you can click an point to add a location in maps.
+// The on thing, I think would've been nice is to have to option to see other peoples posts after I've logged in. 
+// Maybe this is a feature, but I only could find other post after I log out.
 /* GET public posts*/
 router.get("/public", async (req, res) => {
   try {
