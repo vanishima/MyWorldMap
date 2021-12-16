@@ -107,8 +107,8 @@ export default function MapPosts() {
             {loadingPosts && <LoadingSpinner />}
             <div>
               <Map
-                width={55}
-                height={80}
+                width={50}
+                height={70}
                 posts={posts}
                 labels={labels}
                 mapRef={mapRef}
